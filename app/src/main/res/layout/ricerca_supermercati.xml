@@ -34,6 +34,7 @@
         app:layout_constraintVertical_bias="0.56" />
 
     <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="620dp"
@@ -70,17 +71,6 @@
         app:srcCompat="@drawable/adminbutton2" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="180px"
-        android:layout_height="180px"
-        android:layout_marginTop="652dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/homeicon" />
-
-    <ImageView
         android:id="@+id/imageView4"
         android:layout_width="180px"
         android:layout_height="180px"
@@ -101,5 +91,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ricercanegozio_input" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="180px"
+        android:layout_height="180px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.984"
+        app:srcCompat="@drawable/pressedhomeicon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
