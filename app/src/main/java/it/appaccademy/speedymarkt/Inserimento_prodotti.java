@@ -25,7 +25,7 @@ EditText EtEan, EtMarchio, EtNome, EtPrezzo, EtQuantita;
         String nome = EtNome.getText().toString();
         String prezzo = EtPrezzo.getText().toString();
         String quantita = EtQuantita.getText().toString();
-        String type = "insert product";
+        String type = "insert_product";
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute(type, /**idattivita*/, ean, marchio, nome, prezzo, quantita);
     }
