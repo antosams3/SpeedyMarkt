@@ -4,6 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,12 +20,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class Background extends AsyncTask<String,Void,String> {
     Context context;
     String type;
-    boolean cond=false;
+    String user_name;
+    String password;
+    String data="";
+
     AlertDialog alertDialog;
     Background(Context ctx) {
         context = ctx;
@@ -32,8 +42,9 @@ public class Background extends AsyncTask<String,Void,String> {
             case "login":
                 String login_url = "http://10.0.2.2/login7.php";
                 try {
-                    String user_name = params[1];
-                    String password = params[2];
+
+                    user_name = params[1];
+                    password = params[2];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -56,11 +67,6 @@ public class Background extends AsyncTask<String,Void,String> {
                     bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
-                    if(result.equals("Accesso eseguito")){
-                        SchermataIniziale.cond=true;
-                    }else{
-                        SchermataIniziale.cond=false;
-                    }
                     return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -99,12 +105,7 @@ public class Background extends AsyncTask<String,Void,String> {
                     bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
-                    if(result.equals("Utente creato con successo")){
-                        Registrazione.cond=true;
-                    }else{
-                        Registrazione.cond=false;
-                    }
-
+                    //Intent intent = new Intent(this.context, SchermataIniziale.class);
                     return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -113,10 +114,11 @@ public class Background extends AsyncTask<String,Void,String> {
                 }
                 break;
             case "tipo":
-                login_url = "http://10.0.2.2/login7.php";
+                login_url = "http://10.0.2.2/tipo7.php";
                 try {
                     String user_name = params[1];
                     String password = params[2];
+                    String piva="";
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -130,20 +132,28 @@ public class Background extends AsyncTask<String,Void,String> {
                     bufferedWriter.close();
                     outputStream.close();
                     InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                    String result ="";
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     String line = "";
-                    while((line = bufferedReader.readLine())!= null) {
-                        result+=line;
+                    while(line != null){
+                        line = bufferedReader.readLine();
+                        data = data + line;
+                    }
+                    JSONArray JA = new JSONArray(data);
+                    for(int i = 0; i < JA.length(); i++){
+                        JSONObject JO = (JSONObject) JA.get(i);
+                        piva = (String) JO.get("piva") +"\n";
+                        //dataParsed = dataParsed + singleParsed;
+                        //System.out.println(lista.get(i).toString());
                     }
                     bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
-
-                    return result;
+                    return piva;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -155,25 +165,25 @@ public class Background extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        switch(type){
-            case "login":
                 alertDialog.setTitle("Stato login");
-                break;
-            case "insert":
-                alertDialog.setTitle("Stato registrazione");
-                break;
-        }
+
     }
     @Override
     protected void onPostExecute(String result) {
-        if(!type.equals("tipo")){
             alertDialog.setMessage(result);
             alertDialog.show();
-        }
-
-
-
-
+            super.onPostExecute(result);
+            if(result.equals("Accesso eseguito")){
+                Intent intent = new Intent( this.context, RicercaSupermercati.class);
+                intent.putExtra("email",user_name);
+                context.startActivity(intent);
+            }
+            if(result.equals("Utente creato con successo")){
+                Intent intent = new Intent( this.context, SchermataIniziale.class);
+                intent.putExtra("email",user_name);
+                intent.putExtra("password",password);
+                context.startActivity(intent);
+            }
     }
 
     @Override
