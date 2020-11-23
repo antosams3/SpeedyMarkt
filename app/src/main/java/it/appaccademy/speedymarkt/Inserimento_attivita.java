@@ -49,6 +49,6 @@ public class Inserimento_attivita extends AppCompatActivity {
         String categoria = Sel_Categoria.getSelectedItem().toString();
         System.out.println(categoria);
         Background backgroundWorker = new Background(this);
-        backgroundWorker.execute("insert_attivita",nome,indirizzo,civico,cap,telefono,email,categoria);
+        backgroundWorker.execute("insert_activity",nome,indirizzo,civico,cap,telefono,email,categoria);
     }
 }

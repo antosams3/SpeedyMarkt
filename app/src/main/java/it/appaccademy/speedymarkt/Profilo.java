@@ -25,8 +25,8 @@ public static TextView data;
         TvAnagEmail = (TextView) findViewById(R.id.tvAnagEmail);
         TvAnagCarta = (TextView) findViewById(R.id.tvAnagCarta);
         TvAnagScadenza = (TextView) findViewById(R.id.tvAnagScadenza);
-        Background  process = new Background(this);
-        process.execute("profilo");
+        BackgroundJSON  process = new BackgroundJSON();
+        process.execute();
 
 
 
