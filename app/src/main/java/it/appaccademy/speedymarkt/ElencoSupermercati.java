@@ -17,15 +17,19 @@ public class ElencoSupermercati extends AppCompatActivity {
 
     ListView elenco;
     static ArrayList<singleRow> vettore;
+    String negozio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.elenco_supermercati);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            negozio = extras.getString("negozio");
+        }
         vettore=new ArrayList<>();
-        //vettore.add(new singleRow("Supermercato","Speedy","Via dal cazzo","9"));
-        //vettore.add(new singleRow("Superidocane","Speedy","Via dal cazzo","9"));
+
         Background b=new Background(this);
-        b.execute();
+        b.execute(); //bisognerà passare variabile negozio nel background
         elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
         elenco.setAdapter(new customAdapter(this,vettore));
     }

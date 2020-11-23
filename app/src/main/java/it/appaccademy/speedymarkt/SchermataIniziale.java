@@ -29,6 +29,7 @@ public class SchermataIniziale extends AppCompatActivity {
         //Intent intent1 = new Intent(this, MainActivity2.class);
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute("login", email, password);
+        //aggiungere controllo sul tipo di accesso effettuato, per andare rispettivamente in RicercaSupermercati (come sta ora) o AccessoAdmin
     }
 
     public void Registrati(View view) {
