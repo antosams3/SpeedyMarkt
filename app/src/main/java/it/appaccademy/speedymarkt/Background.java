@@ -2,6 +2,7 @@ package it.appaccademy.speedymarkt;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -98,6 +99,13 @@ public class Background extends AsyncTask<String,Void,String> {
                     bufferedReader.close();
                     inputStream.close();
                     httpURLConnection.disconnect();
+                    if(result.equals("Utente creato con successo")){
+
+                        Registrazione.cond=true;
+                    }else{
+                        Registrazione.cond=false;
+                    }
+
                     return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

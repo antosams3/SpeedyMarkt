@@ -30,8 +30,11 @@ public class SchermataIniziale extends AppCompatActivity {
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute("login", email, password);
         if(cond==true){
-            Intent i1=new Intent(this,RicercaSupermercati.class);
-            startActivity(i1);
+            Intent intent = new Intent( this, RicercaSupermercati.class);
+            intent.putExtra("email", email);
+            intent.putExtra("password", password);
+            startActivity(intent);
+            startActivity(intent);
         }
     }
 

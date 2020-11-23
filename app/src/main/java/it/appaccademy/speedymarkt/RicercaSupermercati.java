@@ -11,4 +11,5 @@ public class RicercaSupermercati extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ricerca_supermercati);
     }
+
 }
