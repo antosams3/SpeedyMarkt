@@ -100,11 +100,45 @@ public class Background extends AsyncTask<String,Void,String> {
                     inputStream.close();
                     httpURLConnection.disconnect();
                     if(result.equals("Utente creato con successo")){
-
                         Registrazione.cond=true;
                     }else{
                         Registrazione.cond=false;
                     }
+
+                    return result;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "tipo":
+                login_url = "http://10.0.2.2/login7.php";
+                try {
+                    String user_name = params[1];
+                    String password = params[2];
+                    URL url = new URL(login_url);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("email", "UTF-8")+"="+URLEncoder.encode(user_name, "UTF-8")+"&"+URLEncoder.encode("password", "UTF-8")+"="+URLEncoder.encode(password, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                    String result ="";
+                    String line = "";
+                    while((line = bufferedReader.readLine())!= null) {
+                        result+=line;
+                    }
+                    bufferedReader.close();
+                    inputStream.close();
+                    httpURLConnection.disconnect();
 
                     return result;
                 } catch (MalformedURLException e) {
@@ -121,12 +155,22 @@ public class Background extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Stato login");
+        switch(type){
+            case "login":
+                alertDialog.setTitle("Stato login");
+                break;
+            case "insert":
+                alertDialog.setTitle("Stato registrazione");
+                break;
+        }
     }
     @Override
     protected void onPostExecute(String result) {
-        alertDialog.setMessage(result);
-        alertDialog.show();
+        if(!type.equals("tipo")){
+            alertDialog.setMessage(result);
+            alertDialog.show();
+        }
+
 
 
 
