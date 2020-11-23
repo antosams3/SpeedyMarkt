@@ -12,7 +12,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class Registrazione extends AppCompatActivity {
-    static boolean cond;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +62,7 @@ public class Registrazione extends AppCompatActivity {
             }else{
                 Background backgroundWorker = new Background(this);
                 backgroundWorker.execute("insert", newnome, newcognome,newdata,newemail,newpassword,newpiva);
-                if(cond==true){
-                    Intent intent1 = new Intent(this, SchermataIniziale.class);
-                    startActivity(intent1);
-                    startActivity(intent1);
-                }
+
             }
         }
     }
