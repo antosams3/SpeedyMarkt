@@ -38,6 +38,13 @@ public class Background extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         type = params[0];
+
+        /**
+         * *****************************
+         * LOGICA SCHERMATA INIZIALE
+         *******************************
+         */
+
         switch (type){
             case "login":
                 String login_url = "http://10.0.2.2/login.php";
@@ -73,6 +80,11 @@ public class Background extends AsyncTask<String,Void,String> {
                     e.printStackTrace();
                 }
                 break;
+
+            /**
+             *
+             *
+             */
             case "insert":
                 login_url = "http://10.0.2.2/register.php";
                 try { //ordine nel database email nome cognome password datanascita  piva
@@ -182,9 +194,7 @@ public class Background extends AsyncTask<String,Void,String> {
 
                 break;
                 case "insert_product":
-                    String type = params[0];
                     login_url = "http://10.0.2.2/insertproduct.php";
-                    if(type.equals("insert product")) {
                         try {
                             String ean = params[1];
                             String marchio = params[2];
@@ -219,15 +229,13 @@ public class Background extends AsyncTask<String,Void,String> {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
 
                     break;
-            case "insert_product":
-                type = params[0];
-                login_url = "http://10.0.2.2/housekeeping.php";
-                if(type.equals("insert_attivita")) {
-                    try {
 
+                        case "insert_activity":
+                login_url = "http://10.0.2.2/housekeeping.php";
+
+                    try {
                         String nome = params[1];
                         String via = params[2];
                         String civico = params[3];
@@ -265,7 +273,7 @@ public class Background extends AsyncTask<String,Void,String> {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
+
                 break;
 
         }
@@ -273,6 +281,7 @@ public class Background extends AsyncTask<String,Void,String> {
 
         return null;
     }
+
 
     @Override
     protected void onPreExecute() {
