@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class ElencoSupermercati extends AppCompatActivity {
     ListView elenco;
     static ArrayList<singleRow> vettore;
     String negozio;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +27,25 @@ public class ElencoSupermercati extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             negozio = extras.getString("negozio");
+            email = extras.getString("email");
         }
         vettore=new ArrayList<>();
 
         Background b=new Background(this);
-        b.execute(); //bisognerà passare variabile negozio nel background
+        b.execute("",negozio);//bisognerà passare variabile negozio nel background
+
         elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
         elenco.setAdapter(new customAdapter(this,vettore));
+
+        elenco.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+
+                singleRow selected = (singleRow)elenco.getItemAtPosition(position);
+                String nome=selected.getNome();
+                String via=selected.getVia();
+                //una volta presi li devo passare
+            }
+        });
     }
 }
 
@@ -41,11 +55,17 @@ class singleRow {
     String Via;
 
 
-    singleRow(String categoria, String nome,String via,String civico){
+    singleRow(String nome,String via,String civico){
         this.Nome=nome;
         this.Via=via;
         this.Via=via+" n°"+civico;
 
+    }
+    public String getNome(){
+        return Nome;
+    }
+    public String getVia(){
+        return Via;
     }
     public String toString(){
         return Nome+" "+Via;

@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -33,6 +34,7 @@ public class Background extends AsyncTask<String, Void, String> {
     String TvCognome = "";
     String TvData = "";
     String TvEmail = "";
+    ArrayList<singleRow> lista;
 
     Background(Context ctx) {
         context = ctx;
@@ -265,7 +267,43 @@ public class Background extends AsyncTask<String, Void, String> {
                 }
 
                 break;
-
+            case "elenco_attivita":
+                try {
+                    URL url = new URL("http://10.0.2.2/elencoattivita.php");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+                    lista=new ArrayList<>();
+                    while(line != null){
+                        line = bufferedReader.readLine();
+                        data = data + line;
+                    }
+                    JSONArray JA = new JSONArray(data);
+                    String Nome;
+                    String Via;
+                    String Civico;
+                    for(int i = 0; i < JA.length(); i++){
+                        JSONObject JO = (JSONObject) JA.get(i);
+                        //Categoria = (String) JO.get("categoria") +"\n";
+                        Nome = (String) JO.get("nome") +"\n";
+                        Via = (String) JO.get("via") +"\n";
+                        Civico = (String) JO.get("civico") +"\n";
+                        lista.add(new singleRow(Nome,Via,Civico));
+                        //dataParsed = dataParsed + singleParsed;
+                        //System.out.println(lista.get(i).toString());
+                    }
+                    for(int i=0;i<lista.size();i++){
+                        ElencoSupermercati.vettore.add(lista.get(i));
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
 
