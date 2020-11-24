@@ -75,6 +75,7 @@
         android:layout_width="180px"
         android:layout_height="180px"
         android:layout_marginTop="652dp"
+        android:onClick="visitaProfilo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.649"
         app:layout_constraintStart_toStartOf="parent"

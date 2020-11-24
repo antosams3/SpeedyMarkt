@@ -353,28 +353,9 @@ public class Background extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-
-        switch(type) {
-            case "login":
-            alertDialog = new AlertDialog.Builder(context).create();
-            alertDialog.setTitle("Stato login:");
-            break;
-
-            case "insert":
-                alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("Stato registrazione:");
-                break;
-
-            case "insert_product":
-                alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("Stato inserimento:");
-                break;
-
-            case "insert_activity":
-                alertDialog = new AlertDialog.Builder(context).create();
-                alertDialog.setTitle("Stato inserimento:");
-                break;
-        }
+        alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Stato login:");
+        
     }
 
     /**
@@ -385,69 +366,16 @@ public class Background extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        switch (type) {
-
-
-            /**
-             ******************************
-             * LOGICA SCHERMATA INIZIALE
-             ******************************
-             */
-            case "login":
-                alertDialog.setMessage(result);
-                alertDialog.show();
-                super.onPostExecute(result);
-                if (result.equals("Accesso eseguito")) {
-                    Intent intent = new Intent(this.context, RicercaSupermercati.class);
-                    intent.putExtra("email", user_name);
-                    context.startActivity(intent);
-
-                }
-                break;
-
-
-            /**
-             ******************************
-             * LOGICA REGISTRAZIONE
-             ******************************
-             */
-            case "insert":
-                alertDialog.setMessage(result);
-                alertDialog.show();
-                super.onPostExecute(result);
-                if (result.equals("Utente creato con successo")) {
-                    Intent intent = new Intent(this.context, RicercaSupermercati.class);
-                    intent.putExtra("email", user_name);
-                    context.startActivity(intent);
-
-
-                }
-                break;
-
-
-            /**
-             ******************************
-             * LOGICA INSERIMENTO PRODOTTI
-             ******************************
-             */
-            case "insert_product":
-                alertDialog.setMessage(result);
-                alertDialog.show();
-                break;
-
-
-            /**
-             ******************************
-             * LOGICA INSERIMENTO ATTIVITA'
-             ******************************
-             */
-            case "insert_activity":
-                alertDialog.setMessage(result);
-                alertDialog.show();
-                break;
-
+        alertDialog.setMessage(result);
+        alertDialog.show();
+        super.onPostExecute(result);
+        if (result.equals("Accesso eseguito")) {
+            Intent intent = new Intent(this.context, RicercaSupermercati.class);
+            intent.putExtra("email", user_name);
+            context.startActivity(intent);
 
         }
+
 
 
     }

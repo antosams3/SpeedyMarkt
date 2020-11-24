@@ -37,15 +37,6 @@ public class ElencoSupermercati extends AppCompatActivity {
         elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
         elenco.setAdapter(new customAdapter(this,vettore));
 
-        elenco.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-
-                singleRow selected = (singleRow)elenco.getItemAtPosition(position);
-                String nome=selected.getNome();
-                String via=selected.getVia();
-                //una volta presi li devo passare
-            }
-        });
     }
 }
 

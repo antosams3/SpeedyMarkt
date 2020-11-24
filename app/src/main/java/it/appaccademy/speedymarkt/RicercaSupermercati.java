@@ -23,4 +23,10 @@ public class RicercaSupermercati extends AppCompatActivity {
         intent.putExtra("negozio", negozio);
         startActivity(intent);
     }
+
+    public void visitaProfilo(View view) {
+        Intent intent = new Intent(this, Profilo.class);
+        intent.putExtra("negozio", negozio);
+        startActivity(intent);
+    }
 }

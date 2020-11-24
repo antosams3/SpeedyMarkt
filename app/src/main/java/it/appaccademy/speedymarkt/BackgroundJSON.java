@@ -7,31 +7,52 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 
-
-public class BackgroundJSON extends AsyncTask<Void, Void, Void> {
+public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         String data = "";
         String TvNome ="";
         String TvCognome = "";
         String TvData = "";
         String TvEmail = "";
+        String email;
         public BackgroundJSON() {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(String... params) {
             try {
+                email=params[0];
                 URL url = new URL("http://10.0.2.2/profilo.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                bufferedReader.close();
+                inputStream.close();
+
+                 httpURLConnection = (HttpURLConnection) url.openConnection();
+                 inputStream = httpURLConnection.getInputStream();
+                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
                 while(line != null){
                     line = bufferedReader.readLine();
