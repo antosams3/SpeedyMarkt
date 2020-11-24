@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpeedyMarkt</string>
+    <string name="suggerimento">Seleziona categoria...</string>
 </resources>
