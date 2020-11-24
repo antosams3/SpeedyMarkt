@@ -1,6 +1,7 @@
 package it.appaccademy.speedymarkt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ public class ElencoSupermercati extends AppCompatActivity {
 
     ListView elenco;
     static ArrayList<singleRow> vettore;
-    String negozio;
+    String negozio_inserito;
     String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,23 +27,23 @@ public class ElencoSupermercati extends AppCompatActivity {
         setContentView(R.layout.elenco_supermercati);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            negozio = extras.getString("negozio");
+            negozio_inserito = extras.getString("negozio");
             email = extras.getString("email");
         }
         vettore=new ArrayList<>();
 
         Background b=new Background(this);
-        b.execute("",negozio);//bisognerà passare variabile negozio nel background
+        b.execute("elenco_supermercati",negozio_inserito);//bisognerà passare variabile negozio nel background
 
         elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
         elenco.setAdapter(new customAdapter(this,vettore));
 
         elenco.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-
                 singleRow selected = (singleRow)elenco.getItemAtPosition(position);
                 String nome=selected.getNome();
                 String via=selected.getVia();
+
                 //una volta presi li devo passare
             }
         });

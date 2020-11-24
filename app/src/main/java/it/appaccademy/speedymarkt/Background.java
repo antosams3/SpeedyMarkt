@@ -270,6 +270,7 @@ public class Background extends AsyncTask<String, Void, String> {
             case "elenco_attivita":
                 try {
                     URL url = new URL("http://10.0.2.2/elencoattivita.php");
+                    String negozio_inserito=params[1];
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
