@@ -1,5 +1,6 @@
 package it.appaccademy.speedymarkt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ String negozio,email,nome,via;
             nome = extras.getString("nome");
             via = extras.getString("via");
         }
+
         // metodo che consente di calcolare l'attività in base al nome, via ed email del proprietario
         EtEan = (EditText) findViewById(R.id.etEan);
         EtMarchio = (EditText) findViewById(R.id.etMarchio);
@@ -36,6 +38,17 @@ String negozio,email,nome,via;
         String quantita = EtQuantita.getText().toString();
         String type = "insert_product";
         Background backgroundWorker = new Background(this);
-        //backgroundWorker.execute(type, /**idattivita*/, ean, marchio, nome, prezzo, quantita);
+        backgroundWorker.execute(type, ean, marchio, nome, prezzo, quantita,"1");
+    }
+
+    public void goHome(View view) {
+        Intent intent = new Intent(this, RicercaSupermercati.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
+    public void visitaProfilo(View view) {
+        Intent intent = new Intent(this, Profilo.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
     }
 }

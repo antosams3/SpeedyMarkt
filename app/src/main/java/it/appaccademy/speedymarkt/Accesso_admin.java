@@ -19,7 +19,7 @@ public class Accesso_admin extends AppCompatActivity {
     }
 
     public void aggiungi_prodotto(View view) {
-        Intent intent = new Intent(this, SelezionaAttivita.class);
+        Intent intent = new Intent(this, Inserimento_prodotti.class);
         intent.putExtra("email", email_admin);
         startActivity(intent);
     }

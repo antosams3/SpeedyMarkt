@@ -38,4 +38,10 @@ public class RicercaSupermercati extends AppCompatActivity {
         intent.putExtra("email", email);
         startActivity(intent);
     }
+
+    public void goCarrello(View view) {
+        Intent intent = new Intent(this, Carrello.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
 }

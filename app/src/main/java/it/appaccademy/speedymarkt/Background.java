@@ -187,6 +187,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     String nome = params[3];
                     String prezzo = params[4];
                     String quantita = params[5];
+                    String idattivita=params[6];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -194,8 +195,8 @@ public class Background extends AsyncTask<String, Void, String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    //String post_data = URLEncoder.encode("//idattivita", "UTF-8") + "=" + URLEncoder.encode(//idattivita, "UTF-8")+"&"+URLEncoder.encode("ean", "UTF-8")+"="+URLEncoder.encode(ean, "UTF-8")+"&"+URLEncoder.encode("marchio", "UTF-8")+"="+URLEncoder.encode(marchio, "UTF-8")+"&"+URLEncoder.encode("nome", "UTF-8")+"="+URLEncoder.encode(nome, "UTF-8")+"&"+URLEncoder.encode("prezzo", "UTF-8")+"="+URLEncoder.encode(prezzo, "UTF-8")+"&"+URLEncoder.encode("quantita", "UTF-8")+"="+URLEncoder.encode(quantita, "UTF-8");
-                            //bufferedWriter.write(post_data);
+                    String post_data = URLEncoder.encode("idattivita", "UTF-8") + "=" + URLEncoder.encode(idattivita, "UTF-8")+"&"+URLEncoder.encode("ean", "UTF-8")+"="+URLEncoder.encode(ean, "UTF-8")+"&"+URLEncoder.encode("marchio", "UTF-8")+"="+URLEncoder.encode(marchio, "UTF-8")+"&"+URLEncoder.encode("nome", "UTF-8")+"="+URLEncoder.encode(nome, "UTF-8")+"&"+URLEncoder.encode("prezzo", "UTF-8")+"="+URLEncoder.encode(prezzo, "UTF-8")+"&"+URLEncoder.encode("quantita", "UTF-8")+"="+URLEncoder.encode(quantita, "UTF-8");
+                            bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
@@ -374,10 +375,14 @@ public class Background extends AsyncTask<String, Void, String> {
             intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
-
-
-
-
+        if (result.equals("Attivita' inserita correttamente!")) {
+            Intent intent = new Intent(this.context, Accesso_admin.class);
+            context.startActivity(intent);
+        }
+        if (result.equals("Prodotto inserito con successo")) {
+            Intent intent = new Intent(this.context, Accesso_admin.class);
+            context.startActivity(intent);
+        }
 
     }
 

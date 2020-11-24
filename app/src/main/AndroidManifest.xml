@@ -13,6 +13,7 @@
         <activity android:name=".RicercaSupermercati" />
         <activity android:name=".Registrazione" />
         <activity android:name=".Profilo" />
+        <activity android:name=".Carrello" />
         <activity android:name=".Accesso_admin" />
         <activity android:name=".Inserimento_prodotti" />
         <activity android:name=".Inserimento_attivita" />

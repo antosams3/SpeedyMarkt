@@ -40,6 +40,7 @@ String email;
 
     public void goHome(View view) {
         Intent intent=new Intent(this,RicercaSupermercati.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
     public void goAdmin(View view) {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/purpbg"
-    tools:context=".MainActivity">
+    tools:context=".Inserimento_prodotti">
 
     <EditText
         android:id="@+id/etEan"
@@ -118,6 +118,7 @@
         android:id="@+id/imageView3"
         android:layout_width="180px"
         android:layout_height="180px"
+        android:onClick="goHome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.371"
@@ -130,6 +131,7 @@
         android:id="@+id/imageView4"
         android:layout_width="180px"
         android:layout_height="180px"
+        android:onClick="visitaProfilo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.649"
