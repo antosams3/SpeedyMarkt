@@ -1,5 +1,6 @@
 package it.appaccademy.speedymarkt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,13 +15,18 @@ import java.util.List;
 
 public class Inserimento_attivita extends AppCompatActivity {
     String email="";
-    String result="";
+    static  boolean cond=false;
     EditText EtNome, EtIndirizzo, EtCivico, EtCap, EtTelefono;
     Spinner Sel_Categoria;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inserimento_attivita);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            email = extras.getString("email");
+        }
+        System.out.println(email);
         EtNome = (EditText) findViewById(R.id.etNome);
         EtIndirizzo = (EditText) findViewById(R.id.etIndirizzo);
         EtCivico = (EditText) findViewById(R.id.etCivico);
@@ -50,5 +56,14 @@ public class Inserimento_attivita extends AppCompatActivity {
         System.out.println(categoria);
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute("insert_activity",nome,indirizzo,civico,cap,telefono,email,categoria);
+    }
+    public void goHome(View view) {
+        Intent intent=new Intent(this,RicercaSupermercati.class);
+        startActivity(intent);
+    }
+    public void visitaProfilo(View view) {
+        Intent intent = new Intent(this, Profilo.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
     }
 }

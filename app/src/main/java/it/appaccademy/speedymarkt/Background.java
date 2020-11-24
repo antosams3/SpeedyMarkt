@@ -373,8 +373,9 @@ public class Background extends AsyncTask<String, Void, String> {
             Intent intent = new Intent(this.context, RicercaSupermercati.class);
             intent.putExtra("email", user_name);
             context.startActivity(intent);
-
         }
+
+
 
 
 

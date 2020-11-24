@@ -45,14 +45,10 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                bufferedReader.close();
-                inputStream.close();
 
-                 httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
                  inputStream = httpURLConnection.getInputStream();
-                 bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line = "";
                 while(line != null){
                     line = bufferedReader.readLine();

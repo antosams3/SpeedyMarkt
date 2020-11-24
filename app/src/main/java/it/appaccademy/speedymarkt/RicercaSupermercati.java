@@ -9,11 +9,15 @@ import android.widget.TextView;
 
 public class RicercaSupermercati extends AppCompatActivity {
     String negozio;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ricerca_supermercati);
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            email = extras.getString("email");
+        }
     }
 
 
@@ -26,7 +30,12 @@ public class RicercaSupermercati extends AppCompatActivity {
 
     public void visitaProfilo(View view) {
         Intent intent = new Intent(this, Profilo.class);
-        intent.putExtra("negozio", negozio);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
+    public void goAdmin(View view) {
+        Intent intent = new Intent(this, Accesso_admin.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 }

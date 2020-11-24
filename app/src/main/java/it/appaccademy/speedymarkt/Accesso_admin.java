@@ -12,7 +12,7 @@ public class Accesso_admin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-             email_admin = extras.getString("user_name");
+             email_admin = extras.getString("email");
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accesso_admin);
@@ -26,6 +26,21 @@ public class Accesso_admin extends AppCompatActivity {
 
     public void aggiungi_attivita(View view) {
         Intent intent = new Intent(this, Inserimento_attivita.class);
+        intent.putExtra("email", email_admin);
+        startActivity(intent);
+    }
+    public void goProfilo(View view) {
+        Intent intent = new Intent(this, Profilo.class);
+        intent.putExtra("email", email_admin);
+        startActivity(intent);
+    }
+    public void goHome(View view) {
+        Intent intent = new Intent(this, RicercaSupermercati.class);
+        intent.putExtra("email", email_admin);
+        startActivity(intent);
+    }
+    public void goAdmin(View view) {
+        Intent intent = new Intent(this, Accesso_admin.class);
         intent.putExtra("email", email_admin);
         startActivity(intent);
     }

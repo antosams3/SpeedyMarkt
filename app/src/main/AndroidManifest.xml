@@ -10,9 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyMarkt">
-        <activity android:name=".RicercaSupermercati"></activity>
+        <activity android:name=".RicercaSupermercati" />
         <activity android:name=".Registrazione" />
-        <activity android:name=".SchermataIniziale">
+        <activity android:name=".Profilo" />
+        <activity android:name=".Accesso_admin" />
+        <activity android:name=".Inserimento_prodotti" />
+        <activity android:name=".Inserimento_attivita" />
+            <activity android:name=".SchermataIniziale" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
