@@ -26,7 +26,7 @@ public class Inserimento_attivita extends AppCompatActivity {
         if (extras != null) {
             email = extras.getString("email");
         }
-        System.out.println(email);
+        System.out.println("sono io "+email);
         EtNome = (EditText) findViewById(R.id.etNome);
         EtIndirizzo = (EditText) findViewById(R.id.etIndirizzo);
         EtCivico = (EditText) findViewById(R.id.etCivico);
@@ -59,6 +59,7 @@ public class Inserimento_attivita extends AppCompatActivity {
     }
     public void goHome(View view) {
         Intent intent=new Intent(this,RicercaSupermercati.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
     public void visitaProfilo(View view) {

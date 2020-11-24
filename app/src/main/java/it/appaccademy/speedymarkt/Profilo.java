@@ -14,7 +14,7 @@ public static TextView TvAnagEmail;
 public static TextView TvAnagDatanasc;
 public static TextView TvAnagCarta;
 public static TextView TvAnagScadenza;
-String email;
+static String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -25,7 +25,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         String TvCognome = "";
         String TvData = "";
         String TvEmail = "";
-        String email;
+        String email="";
         public BackgroundJSON() {
         }
 
@@ -45,7 +45,6 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
-
                 InputStream inputStream = httpURLConnection.getInputStream();
                  inputStream = httpURLConnection.getInputStream();
                  BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -62,8 +61,6 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                     TvNome = (String) JO.get("nome") +"\n";
                     TvCognome = (String) JO.get("cognome") +"\n";
                     TvData = (String) JO.get("dataNasc") +"\n";
-
-
                     //dataParsed = dataParsed + singleParsed;
                 }
 
@@ -79,6 +76,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Profilo.email=email;
             super.onPostExecute(aVoid);
 
            Profilo.TvAnagNome.setText(this.TvNome);

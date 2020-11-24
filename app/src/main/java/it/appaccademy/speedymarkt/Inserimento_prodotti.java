@@ -16,10 +16,9 @@ String negozio,email,nome,via;
         setContentView(R.layout.inserimento_prodotti);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            negozio = extras.getString("negozio");
+
             email = extras.getString("email");
-            nome = extras.getString("nome");
-            via = extras.getString("via");
+
         }
 
         // metodo che consente di calcolare l'attività in base al nome, via ed email del proprietario
@@ -38,7 +37,7 @@ String negozio,email,nome,via;
         String quantita = EtQuantita.getText().toString();
         String type = "insert_product";
         Background backgroundWorker = new Background(this);
-        backgroundWorker.execute(type, ean, marchio, nome, prezzo, quantita,"1");
+        backgroundWorker.execute(type, ean, marchio, nome, prezzo, quantita,"1",email);
     }
 
     public void goHome(View view) {

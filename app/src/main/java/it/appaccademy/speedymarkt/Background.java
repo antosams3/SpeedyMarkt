@@ -36,6 +36,7 @@ public class Background extends AsyncTask<String, Void, String> {
     String TvEmail = "";
     ArrayList<singleRow> lista;
 
+
     Background(Context ctx) {
         context = ctx;
     }
@@ -188,6 +189,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     String prezzo = params[4];
                     String quantita = params[5];
                     String idattivita=params[6];
+                    user_name=params[7];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -377,10 +379,17 @@ public class Background extends AsyncTask<String, Void, String> {
         }
         if (result.equals("Attivita' inserita correttamente!")) {
             Intent intent = new Intent(this.context, Accesso_admin.class);
+            intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
         if (result.equals("Prodotto inserito con successo")) {
             Intent intent = new Intent(this.context, Accesso_admin.class);
+            intent.putExtra("email", user_name);
+            context.startActivity(intent);
+        }
+        if (result.equals("Utente creato con successo")) {
+            Intent intent = new Intent(this.context, SchermataIniziale.class);
+            intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
 
