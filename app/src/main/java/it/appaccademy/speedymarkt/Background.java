@@ -267,13 +267,46 @@ public class Background extends AsyncTask<String, Void, String> {
                 }
 
                 break;
+
+
+            /**
+             ******************************
+             * LOGICA ELENCO ATTIVITA'
+             ******************************
+             */
+
+
             case "elenco_attivita":
                 try {
+                    String negozio = params[1];
+                    String email = params[2];
                     URL url = new URL("http://10.0.2.2/elencoattivita.php");
                     String negozio_inserito=params[1];
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+                    /**
+                     * Parte di invio dati
+                     */
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(negozio, "UTF-8") + "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
                     InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                    bufferedReader.close();
+                    inputStream.close();
+
+                    /**
+                     * Parte di lettura dati
+                     */
+                    inputStream = httpURLConnection.getInputStream();
+                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     String line = "";
                     lista=new ArrayList<>();
                     while(line != null){
