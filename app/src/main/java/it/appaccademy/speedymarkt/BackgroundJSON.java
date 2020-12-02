@@ -26,6 +26,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         String TvData = "";
         String TvEmail = "";
         String email="";
+
         public BackgroundJSON() {
         }
 
