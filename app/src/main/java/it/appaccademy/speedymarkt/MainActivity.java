@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId() == R.id.inserisci_prodotto){
 
         }
-
         return true;
     }
 
