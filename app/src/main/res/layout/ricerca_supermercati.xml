@@ -29,10 +29,11 @@
         app:layout_constraintVertical_bias="0.439" />
 
     <EditText
-        android:id="@+id/cerca"
+        android:id="@+id/search_bar"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_edittextdata"
+        android:drawableRight="@drawable/ic_baseline_search_24"
         android:ems="10"
         android:fontFamily="@font/open_sans_light"
         android:gravity="center"
@@ -43,8 +44,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363" />
-
+        app:layout_constraintVertical_bias="0.363"/>
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
