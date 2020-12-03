@@ -12,10 +12,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 public class SchermataIniziale extends AppCompatActivity {
     String email;
     String password;
-    static boolean cond=false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +25,27 @@ public class SchermataIniziale extends AppCompatActivity {
     }
 
 
-    public void Accesso (View view) {
+    public void Accesso(View view) {
         email = ((EditText) findViewById(R.id.login_email)).getText().toString();
         password = ((EditText) findViewById(R.id.login_password)).getText().toString();
-        //Intent intent1 = new Intent(this, MainActivity2.class);
+
+
+        //Thread
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute("login", email, password);
-        //aggiungere controllo sul tipo di accesso effettuato, per andare rispettivamente in RicercaSupermercati (come sta ora) o AccessoAdmin
+        //aggiungere controllo sul tipo di accesso effettuato
     }
 
+    //Accesso a register
     public void Registrati(View view) {
         Intent intent1 = new Intent(this, Registrazione.class);
         startActivity(intent1);
+    }
+
+    protected void onResume(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.schermata_iniziale);
+
     }
 
 

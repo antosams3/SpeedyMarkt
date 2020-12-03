@@ -22,8 +22,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
 public class Background extends AsyncTask<String, Void, String> {
     Context context;
     String type;
@@ -95,7 +93,7 @@ public class Background extends AsyncTask<String, Void, String> {
              */
             case "insert":
                 login_url = "http://10.0.2.2/register.php";
-                try { //ordine nel database email nome cognome password datanascita  piva
+                try {
                     String nome = params[1];
                     String cognome = params[2];
                     String data = params[3];
@@ -236,7 +234,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     String civico = params[3];
                     String cap = params[4];
                     String telefono = params[5];
-                    String email = params[6];
+                    String user_name = params[6];
                     String categoria = params[7];
                     //prendere param da user_name
                     URL url = new URL(login_url);
@@ -246,8 +244,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    //aggiungi il param user_name
-                    String post_data = URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("categoria", "UTF-8") + "=" + URLEncoder.encode(categoria, "UTF-8") + "&" + URLEncoder.encode("via", "UTF-8") + "=" + URLEncoder.encode(via, "UTF-8") + "&" + URLEncoder.encode("civico", "UTF-8") + "=" + URLEncoder.encode(civico, "UTF-8") + "&" + URLEncoder.encode("cap", "UTF-8") + "=" + URLEncoder.encode(cap, "UTF-8") + "&" + URLEncoder.encode("telefono", "UTF-8") + "=" + URLEncoder.encode(telefono, "UTF-8") + "&" + URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                    String post_data = URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("categoria", "UTF-8") + "=" + URLEncoder.encode(categoria, "UTF-8") + "&" + URLEncoder.encode("via", "UTF-8") + "=" + URLEncoder.encode(via, "UTF-8") + "&" + URLEncoder.encode("civico", "UTF-8") + "=" + URLEncoder.encode(civico, "UTF-8") + "&" + URLEncoder.encode("cap", "UTF-8") + "=" + URLEncoder.encode(cap, "UTF-8") + "&" + URLEncoder.encode("telefono", "UTF-8") + "=" + URLEncoder.encode(telefono, "UTF-8") + "&" + URLEncoder.encode("user_name", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -357,7 +354,7 @@ public class Background extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Stato login:");
+        alertDialog.setTitle("Status:");
         
     }
 
@@ -372,23 +369,31 @@ public class Background extends AsyncTask<String, Void, String> {
         alertDialog.setMessage(result);
         alertDialog.show();
         super.onPostExecute(result);
+
+        //Accesso a RicercaSupermercati da SchermataIniziale con dato email
         if (result.equals("Accesso eseguito")) {
-            Intent intent = new Intent(this.context, RicercaSupermercati.class);
+            Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
+
+        //Ritorno ad Accesso_admin dopo Inserimento_attivita con dato email
         if (result.equals("Attivita' inserita correttamente!")) {
             Intent intent = new Intent(this.context, Accesso_admin.class);
             intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
+
+        //Ritorno ad Accesso_admin dopo Inserimento_prodotto con dato email
         if (result.equals("Prodotto inserito con successo")) {
             Intent intent = new Intent(this.context, Accesso_admin.class);
             intent.putExtra("email", user_name);
             context.startActivity(intent);
         }
+
+        //Accesso a SchermataIniziale terminata una registrazione con passaggio del dato email
         if (result.equals("Utente creato con successo")) {
-            Intent intent = new Intent(this.context, SchermataIniziale.class);
+            Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
             context.startActivity(intent);
         }

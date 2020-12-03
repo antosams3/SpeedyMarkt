@@ -3,112 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/zagnbg"
-    tools:context=".RicercaSupermercati">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="368dp"
-        android:layout_height="209dp"
-        app:layout_constraintBottom_toTopOf="@+id/ricercanegozio_input"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/brokenlogo" />
-
-    <EditText
-        android:id="@+id/ricercanegozio_input"
-        android:layout_width="317dp"
-        android:layout_height="58dp"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Cerca un negozio ..."
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="620dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sidedef2" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="180px"
-        android:layout_height="180px"
-        android:layout_marginTop="652dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:onClick="goCarrello"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/spesabtn" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="180px"
-        android:layout_height="180px"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="652dp"
-        android:onClick="goAdmin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/adminbutton2" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="180px"
-        android:layout_height="180px"
-        android:layout_marginTop="652dp"
-        android:onClick="visitaProfilo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.649"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profilebtn" />
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/ricerca_button"
-        android:layout_width="114dp"
-        android:layout_height="54dp"
-        android:onClick="selezionaNegozio"
-        android:text="Cerca"
-        android:textColor="#8C3F78B5"
-        app:backgroundTint="@color/white"
+        android:id="@+id/button2"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="65dp"
+        android:background="@drawable/rounded_buttons"
+        android:fontFamily="@font/open_sans_light"
+        android:hint="Cerca"
+        android:onClick="controlla"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.439" />
+
+    <EditText
+        android:id="@+id/cerca"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittextdata"
+        android:ems="10"
+        android:fontFamily="@font/open_sans_light"
+        android:gravity="center"
+        android:hint="Cerca un supermercato"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="167dp"
+        android:layout_marginLeft="167dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="168dp"
+        android:fontFamily="@font/open_sans_light"
+        android:text="Ricerca un supermercato"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="180px"
-        android:layout_height="180px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        app:srcCompat="@drawable/pressedhomeicon" />
+        app:layout_constraintVertical_bias="0.039" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

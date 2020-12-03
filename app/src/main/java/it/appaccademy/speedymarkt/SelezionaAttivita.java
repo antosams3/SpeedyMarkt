@@ -22,11 +22,11 @@ public class SelezionaAttivita extends AppCompatActivity {
     }
 
 
-    public void selezionaNegozio(View view) {
+   /** public void selezionaNegozio(View view) {
         negozio=((TextView)findViewById(R.id.ricercanegozio_input)).getText().toString();
         Intent intent = new Intent(this, ElencoSupermercati.class);
         intent.putExtra("negozio", negozio);
         intent.putExtra("email",email_admin);
-        startActivity(intent);
+        startActivity(intent);*/
     }
-}
+

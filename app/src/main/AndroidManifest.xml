@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SpeedyMarkt">
-        <activity android:name=".RicercaSupermercati" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Registrazione" />
         <activity android:name=".Profilo" />
         <activity android:name=".Carrello" />
@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Pannello navigazione">
+        <menu>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/profilo"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="Profilo" />
+    <item
+        android:id="@+id/carrello"
+        android:icon="@drawable/ic_baseline_add_shopping_cart_24"
+        android:title="Carrello" />
+            <item
+                android:id="@+id/notifiche"
+                android:icon="@drawable/ic_baseline_notifications_active_24"
+                android:title="Notifiche" />
+            <item
+                android:id="@+id/esci"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                android:title="Esci" />
+        </menu>
+    </item>
+
+    <item android:title="Amministrazione">
+        <menu>
+            <item
+                android:id="@+id/inserisci_attivita"
+                android:icon="@drawable/ic_baseline_add_business_24"
+                android:title="Inserisci Attività" />
+            <item
+                android:id="@+id/inserisci_prodotto"
+                android:icon="@drawable/ic_baseline_add_box_24"
+                android:title="Inserisci Prodotto" />
+        </menu>
+    </item>
+</menu>
