@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     String negozio;
+
     String email;
 
     @Override
