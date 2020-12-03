@@ -7,9 +7,9 @@
         android:id="@+id/nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="1dp"
+
         android:layout_marginBottom="10dp"
         android:text="Nome"
         android:textColor="@color/black"
@@ -20,9 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nome"
-        android:layout_marginStart="10dp"
+
         android:layout_marginTop="0dp"
-        android:layout_marginEnd="1dp"
+
         android:layout_marginBottom="10dp"
         android:text="Via"
         android:textColor="@color/black"

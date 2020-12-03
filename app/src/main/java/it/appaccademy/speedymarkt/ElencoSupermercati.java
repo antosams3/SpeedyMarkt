@@ -6,13 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 public class ElencoSupermercati extends AppCompatActivity {
 
@@ -31,11 +36,11 @@ public class ElencoSupermercati extends AppCompatActivity {
         }
         vettore=new ArrayList<>();
 
-        Background b=new Background(this);
-        b.execute("",negozio);//bisognerà passare variabile negozio nel background
-
+        BackgroundJSON b=new BackgroundJSON();
+        b.execute("elenco",negozio);//bisognerà passare variabile negozio nel background
         elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
         elenco.setAdapter(new customAdapter(this,vettore));
+
 
     }
 }
@@ -52,6 +57,7 @@ class singleRow {
         this.Via=via+" n°"+civico;
 
     }
+
     public String getNome(){
         return Nome;
     }
@@ -97,10 +103,17 @@ class customAdapter extends BaseAdapter {
         TextView nome=(TextView)convertView.findViewById(R.id.nome);
         TextView via=(TextView)convertView.findViewById(R.id.via);
         singleRow tmp=list.get(position);
-
         nome.setText(tmp.Nome);
         via.setText(tmp.Via);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Hai selezionato elemento"+position,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
+
+
 }
