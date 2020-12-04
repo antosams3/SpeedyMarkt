@@ -129,14 +129,13 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Profilo.email=email;
-            super.onPostExecute(aVoid);
+                /**Profilo.email = email;
+                super.onPostExecute(aVoid);
 
-           Profilo.TvAnagNome.setText(this.TvNome);
-           Profilo.TvAnagCognome.setText(this.TvCognome);
-           Profilo.TvAnagDatanasc.setText(this.TvData);
-           Profilo.TvAnagEmail.setText(this.TvEmail);
-
+                Profilo.TvAnagNome.setText(this.TvNome);
+                Profilo.TvAnagCognome.setText(this.TvCognome);
+                Profilo.TvAnagDatanasc.setText(this.TvData);
+                Profilo.TvAnagEmail.setText(this.TvEmail);*/
 
         }
     }

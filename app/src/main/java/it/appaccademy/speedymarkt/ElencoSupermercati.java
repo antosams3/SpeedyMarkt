@@ -13,47 +13,51 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
-public class ElencoSupermercati extends AppCompatActivity {
+public class ElencoSupermercati extends Fragment {
 
     ListView elenco;
     static ArrayList<singleRow> vettore;
     String negozio;
     String email;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.elenco_supermercati);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            negozio = extras.getString("negozio");
-            email = extras.getString("email");
-        }
-        vettore=new ArrayList<>();
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.elenco_supermercati, container, false);
+
+        if (getArguments() != null){
+            negozio = getArguments().getString("negozio");
+        }
+
+        vettore=new ArrayList<>();
+        System.out.println("Sono qui 3 " + negozio);
         BackgroundJSON b=new BackgroundJSON();
         b.execute("elenco",negozio);//bisognerà passare variabile negozio nel background
-        elenco=(ListView)findViewById(R.id.listview_elencosupermercati);
-        elenco.setAdapter(new customAdapter(this,vettore));
+        elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
+        elenco.setAdapter(new customAdapter(getActivity(), vettore));
 
 
+    return view;
     }
 }
 
 
 class singleRow {
-    String Nome;
-    String Via;
+     String Nome;
+     String Via;
+     String Civico;
 
 
     singleRow(String nome,String via,String civico){
         this.Nome=nome;
-        this.Via=via;
         this.Via=via+" n°"+civico;
 
     }

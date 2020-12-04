@@ -142,11 +142,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onButtonSelcted() {
-        Intent intent = new Intent(this, ElencoSupermercati.class);
-        intent.putExtra("negozio", negozio);
-        startActivity(intent);
+        System.out.println("Sono qui 2 "+negozio);
+        ElencoSupermercati fragmento = new ElencoSupermercati();
+        Bundle args = new Bundle();
+        args.putString("negozio", "Rocco");
+        fragmento.setArguments(args);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, fragmento);
+        fragmentTransaction.commit();
+
     }
     public void hitler(String v){
+        System.out.println("hitler " + negozio);
         negozio=v;
     }
 }

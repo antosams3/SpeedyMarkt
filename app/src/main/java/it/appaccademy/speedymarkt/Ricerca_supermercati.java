@@ -22,14 +22,15 @@ public class Ricerca_supermercati extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ricerca_supermercati, container, false);
         inserimentosup=((EditText)view.findViewById(R.id.cerca));
-        supermercato=inserimentosup.getText().toString();
         cerca=view.findViewById(R.id.button2);
         cerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onButtonSelcted();
                 MainActivity m1= (MainActivity) getActivity();
+                supermercato=inserimentosup.getText().toString();
+                listener.onButtonSelcted();
                 m1.hitler(supermercato);
+                System.out.println("Sono qui 0 "+supermercato);
 
             }
         });
