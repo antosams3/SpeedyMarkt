@@ -1,5 +1,6 @@
 package it.appaccademy.speedymarkt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,10 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class Ricerca_supermercati extends Fragment {
-    private onFragmentBtnSelected listener;
+    onFragmentBtnSelected listener;
     EditText inserimentosup;
     Button cerca;
     String supermercato;
+
+
+
 
     @Nullable
     @Override
@@ -29,28 +33,28 @@ public class Ricerca_supermercati extends Fragment {
             public void onClick(View v) {
                 MainActivity m1= (MainActivity) getActivity();
                 supermercato=inserimentosup.getText().toString();
-                listener.onButtonSelcted();
-                m1.hitler(supermercato);
-                System.out.println("Sono qui 0 "+supermercato);
-
+                listener.onButtonSelcted(supermercato);
             }
         });
         return view;
     }
 
+
     @Override
-    public void onAttach(@NonNull Context context) {
+    public void onAttach( Context context) {
         super.onAttach(context);
-        if (context instanceof onFragmentBtnSelected) {
+        try  {
             listener = (onFragmentBtnSelected) context;
-        } else {
+
+        } catch(ClassCastException e) {
             throw new ClassCastException(context.toString() + "ciao");
         }
 
     }
 
     public interface onFragmentBtnSelected{
-        public void onButtonSelcted();
+        public void onButtonSelcted(String s);
     }
+
 
 }

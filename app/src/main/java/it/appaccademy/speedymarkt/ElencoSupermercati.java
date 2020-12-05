@@ -44,7 +44,7 @@ public class ElencoSupermercati extends Fragment {
         }
 
         Lavoratore process = new Lavoratore(getContext());
-        process.execute(negozio);//bisognerà passare variabile negozio nel background
+        process.execute(negozio);
 
     return view;
     }
@@ -104,7 +104,7 @@ class customAdapter extends BaseAdapter {
         if(convertView==null){
             convertView=layoutInflater.inflate(R.layout.singlerow,parent,false);
         }
-        //View row=layoutInflater.inflate(R.layout.singlerow,parent,false);
+
         TextView nome=(TextView)convertView.findViewById(R.id.nome);
         TextView via=(TextView)convertView.findViewById(R.id.via);
         singleRow tmp=list.get(position);
@@ -113,7 +113,8 @@ class customAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Hai selezionato elemento"+position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
+
             }
         });
 

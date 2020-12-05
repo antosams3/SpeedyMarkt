@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -27,14 +29,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     String negozio;
-
+    public static ArrayList<singleRow> lista;
     String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
@@ -141,11 +142,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onButtonSelcted() {
-        System.out.println("Sono qui 2 "+negozio);
+    public void onButtonSelcted(String s) {
         ElencoSupermercati fragmento = new ElencoSupermercati();
         Bundle args = new Bundle();
-        args.putString("negozio", "Rocco");
+        System.out.println("prova dio: "+s);
+        args.putString("negozio", "Dok");
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -153,8 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
 
     }
-    public void hitler(String v){
-        System.out.println("hitler " + negozio);
-        negozio=v;
-    }
+
+
+
 }
