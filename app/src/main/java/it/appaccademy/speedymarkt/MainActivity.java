@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         System.out.println("Sono qui 2 "+negozio);
         ElencoSupermercati fragmento = new ElencoSupermercati();
         Bundle args = new Bundle();
-        args.putString("negozio", "Rocco");
+        args.putString("negozio", "R");
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();

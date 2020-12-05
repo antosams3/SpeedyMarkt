@@ -27,8 +27,7 @@ public class ElencoSupermercati extends Fragment {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
-    static TextView TvNome;
-    static TextView TvVia;
+
 
     @Nullable
     @Override
@@ -43,10 +42,11 @@ public class ElencoSupermercati extends Fragment {
             negozio = getArguments().getString("negozio");
         }
 
+        //Thread
         Lavoratore process = new Lavoratore(getContext());
-        process.execute(negozio);//bisognerà passare variabile negozio nel background
-
+        process.execute(negozio);
     return view;
+
     }
 }
 
