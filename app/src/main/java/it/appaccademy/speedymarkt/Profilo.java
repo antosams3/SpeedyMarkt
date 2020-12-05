@@ -20,7 +20,6 @@ public class Profilo extends Fragment {
     public static TextView TvAnagCarta;
     public static TextView TvAnagScadenza;
     static String email;
-    static String stringona;
 
 
     @Nullable
@@ -35,42 +34,9 @@ public class Profilo extends Fragment {
         TvAnagCarta =  view.findViewById(R.id.tvAnagCarta);
         TvAnagScadenza =  view.findViewById(R.id.tvAnagScadenza);
 
-        if (getArguments() != null){
-            email = getArguments().getString("email");
-        }
-
         //Thread
         BackgroundJSON process = new BackgroundJSON();
-        process.execute(email);
+        process.execute(MainActivity.email);
         return view;
     }
-
-
-
-    /**Passaggio dato email a Ricercasupermercati
-    public void goHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Passaggio dato email a Accesso_admin
-    public void goAdmin(View view) {
-        Intent intent = new Intent(this, Accesso_admin.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Passaggio dato email a Carrello
-    public void goCarrello(View view) {
-        Intent intent = new Intent(this, Carrello.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Logout
-    public void logout(View view) {
-        Intent intent = new Intent(this, SchermataIniziale.class);
-        startActivity(intent);
-    }*/
 }

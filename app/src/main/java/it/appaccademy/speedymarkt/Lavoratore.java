@@ -1,8 +1,10 @@
 package it.appaccademy.speedymarkt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +29,6 @@ import static it.appaccademy.speedymarkt.ElencoSupermercati.vettore;
 public class Lavoratore extends AsyncTask<String, Void, Void> {
     Context context;
     String data = "";
-    String email = "";
     String negozio;
     String nome;
     String via;
@@ -64,19 +65,22 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
         String line = "";
         while(line != null){
         line = bufferedReader.readLine();
-        data = data + line;
+        if(line!=null) {
+            data = data + line;
         }
-
-        JSONArray JA = new JSONArray(data);
-        elenco = new ArrayList<>();
-        for(int i = 0; i < JA.length(); i++){
-        JSONObject JO = (JSONObject) JA.get(i);
-            nome = (String) JO.get("nome");
-            via = (String) JO.get("via");
-            civico = (String) JO.get("civico");
-            ogg=new singleRow(nome,via,civico);
-            elenco.add(ogg);
-        //dataParsed = dataParsed + singleParsed;
+        }
+        if(!(data.equals("Nessun risultato"))) {
+            JSONArray JA = new JSONArray(data);
+            elenco = new ArrayList<>();
+            for (int i = 0; i < JA.length(); i++) {
+                JSONObject JO = (JSONObject) JA.get(i);
+                nome = (String) JO.get("nome");
+                via = (String) JO.get("via");
+                civico = (String) JO.get("civico");
+                ogg = new singleRow(nome, via, civico);
+                elenco.add(ogg);
+                //dataParsed = dataParsed + singleParsed;
+            }
         }
 
         } catch (MalformedURLException e) {
@@ -96,10 +100,17 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        for (int i=0; i < elenco.size(); i++){
-            vettore.add(elenco.get(i));
+        if (data.equals("Nessun risultato")) {
+            Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this.context, MainActivity.class);
+            context.startActivity(intent);
+
+        } else {
+            for (int i=0; i < elenco.size(); i++){
+                vettore.add(elenco.get(i));
+            }
+            ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore));
         }
 
-        ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore));
     }
 }
