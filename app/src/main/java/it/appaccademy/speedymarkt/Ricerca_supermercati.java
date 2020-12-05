@@ -17,6 +17,7 @@ public class Ricerca_supermercati extends Fragment {
     EditText inserimentosup;
     Button cerca;
     String supermercato;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -20,6 +20,7 @@ public class Profilo extends Fragment {
     public static TextView TvAnagCarta;
     public static TextView TvAnagScadenza;
     static String email;
+    static String stringona;
 
 
     @Nullable
@@ -41,7 +42,6 @@ public class Profilo extends Fragment {
         //Thread
         BackgroundJSON process = new BackgroundJSON();
         process.execute(email);
-
         return view;
     }
 

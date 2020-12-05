@@ -1,6 +1,7 @@
 package it.appaccademy.speedymarkt;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +32,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         String nome;
         String via;
         String civico;
+        ArrayList<singleRow> elenco;
 
         public BackgroundJSON() {
         }
@@ -62,17 +64,13 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                     }
 
                     JSONArray JA = new JSONArray(data);
-                    ArrayList<singleRow> elenco=new ArrayList<>();
+                    elenco = new ArrayList<>();
                     for(int i = 0; i < JA.length(); i++){
                         JSONObject JO = (JSONObject) JA.get(i);
                         nome = (String) JO.get("nome") +"\n";
                         via = (String) JO.get("via") +"\n";
                         civico = (String) JO.get("civico") +"\n";
-                        singleRow ogg=new singleRow(nome,via,civico);
-                        elenco.add(ogg);
-                        //dataParsed = dataParsed + singleParsed;
-                    }
-                    ElencoSupermercati.vettore=elenco;
+                        }
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
@@ -129,13 +127,24 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-                /**Profilo.email = email;
-                super.onPostExecute(aVoid);
+            super.onPostExecute(aVoid);
+
+                ElencoSupermercati.TvNome.setText(this.nome);
+                ElencoSupermercati.TvVia.setText(this.via);
+
+
+
+
+
+
+            /**Profilo.email = email;
+
 
                 Profilo.TvAnagNome.setText(this.TvNome);
                 Profilo.TvAnagCognome.setText(this.TvCognome);
                 Profilo.TvAnagDatanasc.setText(this.TvData);
                 Profilo.TvAnagEmail.setText(this.TvEmail);*/
+
 
         }
     }

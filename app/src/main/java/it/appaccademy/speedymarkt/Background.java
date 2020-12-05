@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,11 @@ public class Background extends AsyncTask<String, Void, String> {
     String TvData = "";
     String TvEmail = "";
     ArrayList<singleRow> lista;
+    String negozio;
+    String nome;
+    String via;
+    String civico;
+    ArrayList<singleRow> elenco;
 
 
     Background(Context ctx) {
@@ -219,6 +225,50 @@ public class Background extends AsyncTask<String, Void, String> {
 
                 break;
 
+            case "elenco":
+                try {
+                    negozio=params[1];
+                    URL url = new URL("http://10.0.2.2/negozio.php");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("negozio", "UTF-8") + "=" + URLEncoder.encode(negozio, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+                    while(line != null){
+                        line = bufferedReader.readLine();
+                        data = data + line;
+                    }
+
+                    JSONArray JA = new JSONArray(data);
+                    elenco = new ArrayList<>();
+                    for(int i = 0; i < JA.length(); i++){
+                        JSONObject JO = (JSONObject) JA.get(i);
+                        nome = (String) JO.get("nome") +"\n";
+                        via = (String) JO.get("via") +"\n";
+                        civico = (String) JO.get("civico") +"\n";
+                        singleRow ogg=new singleRow(nome,via,civico);
+                        elenco.add(ogg);
+                        //dataParsed = dataParsed + singleParsed;
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
 
             /**
              ******************************
@@ -301,6 +351,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
                     bufferedReader.close();
                     inputStream.close();
+
 
                     /**
                      * Parte di lettura dati

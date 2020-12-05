@@ -23,27 +23,28 @@ import static java.security.AccessController.getContext;
 
 public class ElencoSupermercati extends Fragment {
 
-    ListView elenco;
-    static ArrayList<singleRow> vettore;
-    String negozio;
-    String email;
+    public static ListView elenco;
+    public static ArrayList<singleRow> vettore;
+    public String negozio;
+    public String email;
+    static TextView TvNome;
+    static TextView TvVia;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_supermercati, container, false);
 
+        vettore=new ArrayList<singleRow>();
+        elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
+
+
         if (getArguments() != null){
             negozio = getArguments().getString("negozio");
         }
 
-        vettore=new ArrayList<>();
-        System.out.println("Sono qui 3 " + negozio);
-        BackgroundJSON b=new BackgroundJSON();
-        b.execute("elenco",negozio);//bisognerà passare variabile negozio nel background
-        elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
-        elenco.setAdapter(new customAdapter(getActivity(), vettore));
-
+        Lavoratore process = new Lavoratore(getContext());
+        process.execute(negozio);//bisognerà passare variabile negozio nel background
 
     return view;
     }
