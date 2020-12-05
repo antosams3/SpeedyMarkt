@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     String negozio;
     public static ArrayList<singleRow> lista;
-    String email;
+    public static String email;
     String negozio_sel;
 
     @Override
@@ -124,9 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(item.getItemId() == R.id.profilo){
             Profilo fragment = new Profilo();
-            Bundle args = new Bundle();
-            args.putString("email", email);
-            fragment.setArguments(args);
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, fragment);

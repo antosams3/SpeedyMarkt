@@ -33,13 +33,6 @@ public class ElencoSupermercati extends Fragment  {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
-    static TextView TvNome;
-    static TextView TvVia;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,9 +50,6 @@ public class ElencoSupermercati extends Fragment  {
         process.execute(negozio);
     return view;
     }
-
-
-
 }
 
 
