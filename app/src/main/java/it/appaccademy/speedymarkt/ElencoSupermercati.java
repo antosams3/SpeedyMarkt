@@ -1,6 +1,8 @@
 package it.appaccademy.speedymarkt;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +14,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
 
-public class ElencoSupermercati extends Fragment {
+public class ElencoSupermercati extends Fragment  {
 
     public static ListView elenco;
     public static ArrayList<singleRow> vettore;
@@ -29,6 +35,10 @@ public class ElencoSupermercati extends Fragment {
     public String email;
     static TextView TvNome;
     static TextView TvVia;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
+
 
     @Nullable
     @Override
@@ -45,9 +55,22 @@ public class ElencoSupermercati extends Fragment {
 
         Lavoratore process = new Lavoratore(getContext());
         process.execute(negozio);
-
     return view;
     }
+
+    public void getElencoProdotti(String negoziosel){
+        Prodotti fragment = new Prodotti();
+        Bundle args = new Bundle();
+        args.putString("negozio_sel", negoziosel);
+        fragment.setArguments(args);
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, fragment);
+        fragmentTransaction.commit();
+    }
+
+
 }
 
 
@@ -74,13 +97,22 @@ class singleRow {
     }
 }
 
+
 class customAdapter extends BaseAdapter {
+
     ArrayList<singleRow> list;
+    EventListener listener;
     Context c;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
 
     public customAdapter(Context context,ArrayList<singleRow> L) {
         c=context;
         list=L;
+    }
+    public interface EventListener {
+        void onEvent(int data);
     }
 
     @Override
@@ -114,12 +146,18 @@ class customAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(c,MainActivity.class);
 
+                i.putExtra("negozio_sel",list.get(position).getNome());
+                c.startActivity(i);
             }
         });
 
         return convertView;
     }
+
+
+
 
 
 }

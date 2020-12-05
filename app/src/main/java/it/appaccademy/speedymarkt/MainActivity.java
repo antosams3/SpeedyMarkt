@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     String email;
+    String negozio_sel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
+            negozio_sel = extras.getString("negozio_sel");
         }
+
+        if(negozio_sel!=null){
+            Prodotti fragmenti = new Prodotti();
+            Bundle args = new Bundle();
+
+            args.putString("negozio_sel",negozio_sel);
+            fragmenti.setArguments(args);
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragmenti);
+            fragmentTransaction.commit();
+        }
+
+
+
+
     }
 
     //Ricerca supermercato
