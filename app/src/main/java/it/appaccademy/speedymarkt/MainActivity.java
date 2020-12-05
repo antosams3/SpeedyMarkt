@@ -145,8 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onButtonSelcted(String s) {
         ElencoSupermercati fragmento = new ElencoSupermercati();
         Bundle args = new Bundle();
-        System.out.println("prova dio: "+s);
-        args.putString("negozio", "Dok");
+        args.putString("negozio",s);
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
