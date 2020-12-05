@@ -127,6 +127,7 @@ class customAdapter extends BaseAdapter {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
                 i.putExtra("negozio_sel",list.get(position).getNome());
+                i.putExtra("email", MainActivity.email);
                 c.startActivity(i);
             }
         });

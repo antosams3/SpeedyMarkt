@@ -13,11 +13,15 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class Prodotti extends Fragment {
+    static String email;
     String negozio;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_prodotti, container, false);
+
+        System.out.println("AWE"+MainActivity.email);
         if (getArguments() != null){
             negozio = getArguments().getString("negozio_sel");
 

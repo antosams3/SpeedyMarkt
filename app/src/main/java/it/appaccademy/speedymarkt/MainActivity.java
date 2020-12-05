@@ -57,7 +57,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
 
 
+
         //Prelievo del dato email
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(negozio_sel!=null){
             Prodotti fragmenti = new Prodotti();
             Bundle args = new Bundle();
-
+            args.putString("email", email);
             args.putString("negozio_sel",negozio_sel);
             fragmenti.setArguments(args);
             fragmentManager = getSupportFragmentManager();
@@ -76,39 +78,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
 
-
-
-
     }
 
-    //Ricerca supermercato
-   /** public void selezionaNegozio(View view) {
-        negozio=((TextView)findViewById(R.id.ricercanegozio_input)).getText().toString();
-        Intent intent = new Intent(this, ElencoSupermercati.class);
-        intent.putExtra("negozio", negozio);
-        startActivity(intent);
-    }*/
-
-    /** //Accesso a profilo
-    public void visitaProfilo(View view) {
-        Intent intent = new Intent(this, Profilo.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Accesso a pannello admin
-    public void goAdmin(View view) {
-        Intent intent = new Intent(this, Accesso_admin.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Accesso a carrello
-    public void goCarrello(View view) {
-        Intent intent = new Intent(this, Carrello.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }*/
 
 
     @Override
