@@ -57,14 +57,18 @@ class singleRow {
      String Nome;
      String Via;
      String Civico;
+     String Id;
 
 
-    singleRow(String nome,String via,String civico){
+    singleRow(String nome,String via,String civico,String id){
         this.Nome=nome;
         this.Via=via+" n°"+civico;
+        this.Id=id;
 
     }
-
+    public String getId() {
+        return Id;
+    }
     public String getNome(){
         return Nome;
     }
@@ -126,7 +130,8 @@ class customAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
-                i.putExtra("negozio_sel",list.get(position).getNome());
+                i.putExtra("negozio_sel",list.get(position).getId());
+                i.putExtra("email",MainActivity.email);
                 c.startActivity(i);
             }
         });

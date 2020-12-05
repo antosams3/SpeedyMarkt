@@ -32,6 +32,7 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     String negozio;
     String nome;
     String via;
+    String id;
     String civico;
     singleRow ogg;
     ArrayList<singleRow> elenco;
@@ -77,7 +78,8 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                 nome = (String) JO.get("nome");
                 via = (String) JO.get("via");
                 civico = (String) JO.get("civico");
-                ogg = new singleRow(nome, via, civico);
+                id = (String) JO.get("id");
+                ogg = new singleRow(nome, via, civico,id);
                 elenco.add(ogg);
                 //dataParsed = dataParsed + singleParsed;
             }
