@@ -8,9 +8,9 @@
     <ListView
         android:id="@+id/listview_elencosupermercati"
         android:layout_width="355dp"
-        android:layout_height="645dp"
+        android:layout_height="653dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="149dp"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="152dp" />
 </LinearLayout>
