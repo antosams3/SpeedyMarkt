@@ -58,17 +58,6 @@ public class ElencoSupermercati extends Fragment  {
     return view;
     }
 
-    public void getElencoProdotti(String negoziosel){
-        Prodotti fragment = new Prodotti();
-        Bundle args = new Bundle();
-        args.putString("negozio_sel", negoziosel);
-        fragment.setArguments(args);
-
-        fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment, fragment);
-        fragmentTransaction.commit();
-    }
 
 
 }
@@ -147,7 +136,6 @@ class customAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
-
                 i.putExtra("negozio_sel",list.get(position).getNome());
                 c.startActivity(i);
             }
