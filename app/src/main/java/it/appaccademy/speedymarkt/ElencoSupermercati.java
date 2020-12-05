@@ -27,8 +27,6 @@ public class ElencoSupermercati extends Fragment {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
-    static TextView TvNome;
-    static TextView TvVia;
 
     @Nullable
     @Override
