@@ -4,11 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,7 +16,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
+
 
 public class Background extends AsyncTask<String, Void, String> {
     Context context;
@@ -29,16 +24,7 @@ public class Background extends AsyncTask<String, Void, String> {
     String user_name;
     AlertDialog alertDialog;
     String data = "";
-    String TvNome = "";
-    String TvCognome = "";
-    String TvData = "";
-    String TvEmail = "";
-    ArrayList<singleRow> lista;
-    String negozio;
-    String nome;
-    String via;
-    String civico;
-    ArrayList<singleRow> elenco;
+
 
 
     Background(Context ctx) {
@@ -225,50 +211,6 @@ public class Background extends AsyncTask<String, Void, String> {
 
                 break;
 
-            case "elenco":
-                try {
-                    negozio=params[1];
-                    URL url = new URL("http://10.0.2.2/negozio.php");
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.setDoInput(true);
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("negozio", "UTF-8") + "=" + URLEncoder.encode(negozio, "UTF-8");
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line = "";
-                    while(line != null){
-                        line = bufferedReader.readLine();
-                        data = data + line;
-                    }
-
-                    JSONArray JA = new JSONArray(data);
-                    elenco = new ArrayList<>();
-                    for(int i = 0; i < JA.length(); i++){
-                        JSONObject JO = (JSONObject) JA.get(i);
-                        nome = (String) JO.get("nome") +"\n";
-                        via = (String) JO.get("via") +"\n";
-                        civico = (String) JO.get("civico") +"\n";
-                        singleRow ogg=new singleRow(nome,via,civico);
-                        elenco.add(ogg);
-                        //dataParsed = dataParsed + singleParsed;
-                    }
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
 
             /**
              ******************************
@@ -319,79 +261,7 @@ public class Background extends AsyncTask<String, Void, String> {
                 break;
 
 
-            /**
-             ******************************
-             * LOGICA ELENCO ATTIVITA'
-             ******************************
-             */
-
-
-            case "elenco_attivita":
-                try {
-                    String negozio = params[1];
-                    String email = params[2];
-                    URL url = new URL("http://10.0.2.2/ricercasupermercatiadmin.php");
-                    String negozio_inserito=params[1];
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                    /**
-                     * Parte di invio dati
-                     */
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.setDoInput(true);
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(negozio, "UTF-8") + "&" + URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
-                    bufferedWriter.write(post_data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                    bufferedReader.close();
-                    inputStream.close();
-
-
-                    /**
-                     * Parte di lettura dati
-                     */
-                    inputStream = httpURLConnection.getInputStream();
-                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line = "";
-                    lista=new ArrayList<>();
-                    while(line != null){
-                        line = bufferedReader.readLine();
-                        data = data + line;
-                    }
-                    JSONArray JA = new JSONArray(data);
-                    String Nome;
-                    String Via;
-                    String Civico;
-                    for(int i = 0; i < JA.length(); i++){
-                        JSONObject JO = (JSONObject) JA.get(i);
-                        //Categoria = (String) JO.get("categoria") +"\n";
-                        Nome = (String) JO.get("nome") +"\n";
-                        Via = (String) JO.get("via") +"\n";
-                        Civico = (String) JO.get("civico") +"\n";
-                        lista.add(new singleRow(Nome,Via,Civico));
-                        //dataParsed = dataParsed + singleParsed;
-                        //System.out.println(lista.get(i).toString());
-                    }
-                    for(int i=0;i<lista.size();i++){
-                        ElencoSupermercati.vettore.add(lista.get(i));
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
         }
-
-
         return null;
     }
 

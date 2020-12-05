@@ -71,9 +71,9 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
         elenco = new ArrayList<>();
         for(int i = 0; i < JA.length(); i++){
         JSONObject JO = (JSONObject) JA.get(i);
-            nome = (String) JO.get("nome") +"\n";
-            via = (String) JO.get("via") +"\n";
-            civico = (String) JO.get("civico") +"\n";
+            nome = (String) JO.get("nome");
+            via = (String) JO.get("via");
+            civico = (String) JO.get("civico");
             ogg=new singleRow(nome,via,civico);
             elenco.add(ogg);
         //dataParsed = dataParsed + singleParsed;
