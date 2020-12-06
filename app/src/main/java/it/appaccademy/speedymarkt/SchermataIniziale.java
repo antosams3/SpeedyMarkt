@@ -40,6 +40,7 @@ public class SchermataIniziale extends AppCompatActivity {
     public void Registrati(View view) {
         Intent intent1 = new Intent(this, Registrazione.class);
         startActivity(intent1);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
     }
 
     protected void onResume(Bundle savedInstanceState){

@@ -198,7 +198,7 @@
         android:fontFamily="@font/open_sans_light"
         android:gravity="center"
         android:text="Data di nascita"
-        android:textColor="#000000"
+        android:textColor="#7F7B8E"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

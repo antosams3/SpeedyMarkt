@@ -3,6 +3,7 @@ package it.appaccademy.speedymarkt;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +35,7 @@ public class ElencoSupermercati extends Fragment  {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -119,7 +122,11 @@ class customAdapter extends BaseAdapter {
         if(convertView==null){
             convertView=layoutInflater.inflate(R.layout.singlerow,parent,false);
         }
-
+        TextView quantita = (TextView)convertView.findViewById(R.id.quantita);
+        ImageButton aggiungiprod = (ImageButton)convertView.findViewById(R.id.buttonadd);
+        ImageButton rimuoviprod = (ImageButton)convertView.findViewById(R.id.buttonremove);
+        int i = 0;
+        quantita.setText(i);
         TextView nome=(TextView)convertView.findViewById(R.id.nome);
         TextView via=(TextView)convertView.findViewById(R.id.via);
         singleRow tmp=list.get(position);
@@ -128,11 +135,20 @@ class customAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
+               /** Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
                 i.putExtra("negozio_sel",list.get(position).getId());
                 i.putExtra("email",MainActivity.email);
-                c.startActivity(i);
+                c.startActivity(i);*/
+
+            }
+
+            public void aggiungiprod(View v){
+                quantita.setText(i+1);
+            }
+
+            public void rimuoviprod(View v){
+                quantita.setText(i-1);
             }
         });
 
