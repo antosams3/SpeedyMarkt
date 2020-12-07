@@ -1,9 +1,11 @@
 package it.appaccademy.speedymarkt;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,7 +32,6 @@ public class Background extends AsyncTask<String, Void, String> {
     String data = "";
 
 
-
     Background(Context ctx) {
         context = ctx;
     }
@@ -40,11 +41,11 @@ public class Background extends AsyncTask<String, Void, String> {
         type = params[0];
         switch (type) {
 
-        /**
-         * *****************************
-         * LOGICA SCHERMATA INIZIALE
-         *******************************
-         */
+            /**
+             * *****************************
+             * LOGICA SCHERMATA INIZIALE
+             *******************************
+             */
 
             case "login":
                 String login_url = "http://10.0.2.2/login.php";
@@ -227,8 +228,8 @@ public class Background extends AsyncTask<String, Void, String> {
                     String nome = params[3];
                     String prezzo = params[4];
                     String quantita = params[5];
-                    String idattivita=params[6];
-                    user_name=params[7];
+                    String idattivita = params[6];
+                    user_name = params[7];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -236,8 +237,8 @@ public class Background extends AsyncTask<String, Void, String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("idattivita", "UTF-8") + "=" + URLEncoder.encode(idattivita, "UTF-8")+"&"+URLEncoder.encode("ean", "UTF-8")+"="+URLEncoder.encode(ean, "UTF-8")+"&"+URLEncoder.encode("marchio", "UTF-8")+"="+URLEncoder.encode(marchio, "UTF-8")+"&"+URLEncoder.encode("nome", "UTF-8")+"="+URLEncoder.encode(nome, "UTF-8")+"&"+URLEncoder.encode("prezzo", "UTF-8")+"="+URLEncoder.encode(prezzo, "UTF-8")+"&"+URLEncoder.encode("quantita", "UTF-8")+"="+URLEncoder.encode(quantita, "UTF-8");
-                            bufferedWriter.write(post_data);
+                    String post_data = URLEncoder.encode("idattivita", "UTF-8") + "=" + URLEncoder.encode(idattivita, "UTF-8") + "&" + URLEncoder.encode("ean", "UTF-8") + "=" + URLEncoder.encode(ean, "UTF-8") + "&" + URLEncoder.encode("marchio", "UTF-8") + "=" + URLEncoder.encode(marchio, "UTF-8") + "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("prezzo", "UTF-8") + "=" + URLEncoder.encode(prezzo, "UTF-8") + "&" + URLEncoder.encode("quantita", "UTF-8") + "=" + URLEncoder.encode(quantita, "UTF-8");
+                    bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
@@ -316,22 +317,18 @@ public class Background extends AsyncTask<String, Void, String> {
 
 
     /**
-     *
      * PRE EXECUTE ********************************************************************************************************************************************
-     *
      */
 
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle("Status:");
-        
+
     }
 
     /**
-     *
      * POST EXECUTE ********************************************************************************************************************************************
-     *
      */
 
     @Override
@@ -366,6 +363,7 @@ public class Background extends AsyncTask<String, Void, String> {
             Intent intent = new Intent(this.context, Carta.class);
             intent.putExtra("email", email_reg);
             context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
         //Accesso a SchermataIniziale terminata una registrazione carta con passaggio del dato email
@@ -373,9 +371,11 @@ public class Background extends AsyncTask<String, Void, String> {
             Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", email_card);
             context.startActivity(intent);
-        }
 
+        }
     }
+
+
 
 
     @Override

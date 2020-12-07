@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class Prodotti extends Fragment {
     String negozio;
     public static ListView elenco;
     public static ArrayList<singleRowProdotto> vettore;
+    Button buttonx;
 
     @Nullable
     @Override
@@ -115,8 +118,10 @@ public class Prodotti extends Fragment {
                 }
             });
 
+
             return convertView;
         }
+
 
 
 

@@ -29,23 +29,8 @@
         android:textSize="14sp" />
 
 
-    <ImageButton
-        android:id="@+id/buttonadd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="230dp"
-        android:layout_marginTop="8dp"
-        android:onClick="aggiungiprod"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
-    <ImageButton
-        android:id="@+id/buttonremove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="330dp"
-        android:layout_marginTop="8dp"
-        android:onClick="rimuoviprod"
-        app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
+
 
     <TextView
         android:id="@+id/quantita"
@@ -58,5 +43,13 @@
         android:text="Qt"
         android:textColor="@color/black"
         android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/buttonx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="150dp"
+        android:text="+" />
 
 </RelativeLayout>
