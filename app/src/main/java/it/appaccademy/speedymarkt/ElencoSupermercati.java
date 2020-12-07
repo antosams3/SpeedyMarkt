@@ -122,11 +122,7 @@ class customAdapter extends BaseAdapter {
         if(convertView==null){
             convertView=layoutInflater.inflate(R.layout.singlerow,parent,false);
         }
-        TextView quantita = (TextView)convertView.findViewById(R.id.quantita);
-        ImageButton aggiungiprod = (ImageButton)convertView.findViewById(R.id.buttonadd);
-        ImageButton rimuoviprod = (ImageButton)convertView.findViewById(R.id.buttonremove);
-        int i = 0;
-        quantita.setText(i);
+
         TextView nome=(TextView)convertView.findViewById(R.id.nome);
         TextView via=(TextView)convertView.findViewById(R.id.via);
         singleRow tmp=list.get(position);
@@ -135,20 +131,12 @@ class customAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /** Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
                 i.putExtra("negozio_sel",list.get(position).getId());
                 i.putExtra("email",MainActivity.email);
-                c.startActivity(i);*/
+                c.startActivity(i);
 
-            }
-
-            public void aggiungiprod(View v){
-                quantita.setText(i+1);
-            }
-
-            public void rimuoviprod(View v){
-                quantita.setText(i-1);
             }
         });
 
