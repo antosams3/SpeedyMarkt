@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,17 +19,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Prodotti extends Fragment {
     String negozio;
     public static ListView elenco;
     public static ArrayList<singleRowProdotto> vettore;
-
+    Button add;
+    public int tot;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_prodotti, container, false);
+        tot=0;
         vettore = new ArrayList<singleRowProdotto>();
         elenco = (ListView) view.findViewById(R.id.listview_elencoprodotti);
         if (getArguments() != null) {
@@ -35,6 +41,7 @@ public class Prodotti extends Fragment {
         }
         WorkerProdotto process = new WorkerProdotto(getContext());
         process.execute(negozio);
+
         return view;
     }
 }
@@ -44,6 +51,7 @@ public class Prodotti extends Fragment {
         String Nome;
         String Marchio;
         String Prezzo;
+        int quantita=0;
 
 
         singleRowProdotto(String marchio,String nome,String prezzo){
@@ -56,8 +64,20 @@ public class Prodotti extends Fragment {
         public String getNome(){
             return Nome;
         }
+        public int getQuantita(){
+            return quantita;
+        }
         public String getMarchio(){
             return Marchio;
+        }
+        public void addQuantita(){
+            quantita++;
+        }
+        public void removeQuantita(){
+            if(quantita!=0){
+                quantita--;
+            }
+
         }
         public String toString(){
             return "Nome: "+Nome+" Marchio: "+Marchio+" Prezzo: "+Prezzo;
@@ -69,6 +89,7 @@ public class Prodotti extends Fragment {
 
         ArrayList<singleRowProdotto> list;
         Context c;
+
 
 
 
@@ -102,6 +123,8 @@ public class Prodotti extends Fragment {
 
             TextView nome=(TextView)convertView.findViewById(R.id.nome);
             TextView marchio=(TextView)convertView.findViewById(R.id.marchio);
+            TextView qt=(TextView) convertView.findViewById(R.id.quantita);
+            qt.setText(String.valueOf(list.get(position).getQuantita()));
             singleRowProdotto tmp=list.get(position);
             nome.setText(tmp.Nome);
             marchio.setText(tmp.Marchio);
@@ -112,6 +135,22 @@ public class Prodotti extends Fragment {
                     //Intent i=new Intent(c,MainActivity.class);
                     //i.putExtra("negozio_sel",list.get(position).getNome());
                     //c.startActivity(i);
+                }
+            });
+            ImageButton add=(ImageButton)convertView.findViewById(R.id.buttonadd);
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.get(position).addQuantita();
+                    qt.setText(String.valueOf(list.get(position).getQuantita()));
+                }
+            });
+            ImageButton rem=(ImageButton)convertView.findViewById(R.id.buttonremove);
+            rem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    list.get(position).removeQuantita();
+                    qt.setText(String.valueOf(list.get(position).getQuantita()));
                 }
             });
 
