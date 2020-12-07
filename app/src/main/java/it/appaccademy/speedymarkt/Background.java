@@ -17,11 +17,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static it.appaccademy.speedymarkt.Profilo.email;
+
 
 public class Background extends AsyncTask<String, Void, String> {
     Context context;
     String type;
     String user_name;
+    String email_reg;
+    String email_card;
     AlertDialog alertDialog;
     String data = "";
 
@@ -89,7 +93,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     String nome = params[1];
                     String cognome = params[2];
                     String data = params[3];
-                    String email = params[4];
+                    email_reg = params[4];
                     String password = params[5];
                     String piva = params[6];
                     URL url = new URL(login_url);
@@ -99,7 +103,52 @@ public class Background extends AsyncTask<String, Void, String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") + "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(cognome, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" + URLEncoder.encode("dataNasc", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8") + "&" + URLEncoder.encode("piva", "UTF-8") + "=" + URLEncoder.encode(piva, "UTF-8");
+                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email_reg, "UTF-8") + "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(cognome, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" + URLEncoder.encode("dataNasc", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8") + "&" + URLEncoder.encode("piva", "UTF-8") + "=" + URLEncoder.encode(piva, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                    String result = "";
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        result += line;
+                    }
+                    bufferedReader.close();
+                    inputStream.close();
+                    httpURLConnection.disconnect();
+                    return result;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
+            /**
+             ****************************
+             * LOGICA REGISTRAZIONE CARTA
+             ****************************
+             */
+
+            case "card":
+                login_url = "http://10.0.2.2/card.php";
+                try {
+                    email_card = params[1];
+                    String titolare = params[2];
+                    String numero = params[3];
+                    String scadenza = params[4];
+                    String cvv = params[5];
+                    URL url = new URL(login_url);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email_card, "UTF-8") + "&" + URLEncoder.encode("titolare", "UTF-8") + "=" + URLEncoder.encode(titolare, "UTF-8") + "&" + URLEncoder.encode("numero", "UTF-8") + "=" + URLEncoder.encode(numero, "UTF-8") + "&" + URLEncoder.encode("scadenza", "UTF-8") + "=" + URLEncoder.encode(scadenza, "UTF-8") + "&" + URLEncoder.encode("cvv", "UTF-8") + "=" + URLEncoder.encode(cvv, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -312,10 +361,17 @@ public class Background extends AsyncTask<String, Void, String> {
             context.startActivity(intent);
         }
 
-        //Accesso a SchermataIniziale terminata una registrazione con passaggio del dato email
+        //Accesso a Carta terminata una registrazione con passaggio del dato email
         if (result.equals("Utente creato con successo")) {
+            Intent intent = new Intent(this.context, Carta.class);
+            intent.putExtra("email", email_reg);
+            context.startActivity(intent);
+        }
+
+        //Accesso a SchermataIniziale terminata una registrazione carta con passaggio del dato email
+        if (result.equals("Carta creata con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-            intent.putExtra("email", user_name);
+            intent.putExtra("email", email_card);
             context.startActivity(intent);
         }
 

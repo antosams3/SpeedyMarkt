@@ -3,7 +3,6 @@ package it.appaccademy.speedymarkt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -84,7 +83,7 @@ public class Registrazione extends AppCompatActivity {
     public void controlla(View view) {
 
         String newnome = ((EditText) findViewById(R.id.register_nome)).getText().toString();
-        String newcognome = ((EditText) findViewById(R.id.register_cognome)).getText().toString();
+        String newcognome = ((EditText) findViewById(R.id.titolare)).getText().toString();
         String newdata = ((TextView) findViewById(R.id.register_data)).getText().toString();
         String newemail = ((EditText) findViewById(R.id.register_email)).getText().toString();
         String newpassword = ((EditText) findViewById(R.id.register_password1)).getText().toString();

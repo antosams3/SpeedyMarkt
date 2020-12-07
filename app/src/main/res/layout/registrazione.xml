@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register_password1" />
 
     <EditText
-        android:id="@+id/register_cognome"
+        android:id="@+id/titolare"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -203,6 +203,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_cognome" />
+        app:layout_constraintTop_toBottomOf="@+id/titolare" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
