@@ -26,6 +26,9 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
     String TvData = "";
     String TvEmail = "";
     String email = "";
+    String TvTitolare ="";
+    String TvCarta ="";
+    String TvScadenza ="";
 
     public BackgroundJSON() {
     }
@@ -62,6 +65,10 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                 TvNome = (String) JO.get("nome") + "\n";
                 TvCognome = (String) JO.get("cognome") + "\n";
                 TvData = (String) JO.get("dataNasc") + "\n";
+                TvTitolare = (String) JO.get("titolare")+"\n";
+                TvCarta = (String) JO.get("numero") + "\n";
+                TvScadenza = (String) JO.get("scadenza") + "\n";
+
 
             }
 
@@ -87,6 +94,9 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         Profilo.TvAnagCognome.setText(this.TvCognome);
         Profilo.TvAnagDatanasc.setText(this.TvData);
         Profilo.TvAnagEmail.setText(this.TvEmail);
+        Profilo.TvAnagTitolare.setText(this.TvTitolare);
+        Profilo.TvAnagScadenza.setText(this.TvScadenza);
+        Profilo.TvAnagCarta.setText(this.TvCarta);
 
 
     }

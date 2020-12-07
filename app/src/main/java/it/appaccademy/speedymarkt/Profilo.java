@@ -1,6 +1,5 @@
 package it.appaccademy.speedymarkt;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class Profilo extends Fragment {
@@ -19,6 +17,7 @@ public class Profilo extends Fragment {
     public static TextView TvAnagDatanasc;
     public static TextView TvAnagCarta;
     public static TextView TvAnagScadenza;
+    public static TextView TvAnagTitolare;
     static String email;
 
 
@@ -31,6 +30,7 @@ public class Profilo extends Fragment {
         TvAnagCognome = view.findViewById(R.id.tvAnagCognome);
         TvAnagDatanasc = view.findViewById(R.id.tvAnagDatanasc);
         TvAnagEmail = view.findViewById(R.id.tvAnagEmail);
+        TvAnagTitolare = view.findViewById(R.id.tvAnagTitolare);
         TvAnagCarta =  view.findViewById(R.id.tvAnagCarta);
         TvAnagScadenza =  view.findViewById(R.id.tvAnagScadenza);
 
