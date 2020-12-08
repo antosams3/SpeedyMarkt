@@ -96,7 +96,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
         Profilo.TvAnagEmail.setText(this.TvEmail);
         Profilo.TvAnagTitolare.setText(this.TvTitolare);
         Profilo.TvAnagScadenza.setText(this.TvScadenza);
-        Profilo.TvAnagCarta.setText(this.TvCarta);
+        Profilo.TvAnagCarta.setText("**** **** **** " + this.TvCarta.substring(12));
 
 
     }
