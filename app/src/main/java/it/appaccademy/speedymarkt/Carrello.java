@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class Carrello extends AppCompatActivity {
     String email;
     protected void onCreate(Bundle savedInstanceState) {
