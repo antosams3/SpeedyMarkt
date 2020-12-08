@@ -61,11 +61,16 @@ class singleRow {
      String Via;
      String Civico;
      String Id;
+     String Cap;
+     String Città;
 
 
-    singleRow(String nome,String via,String civico,String id){
+    singleRow(String nome,String via,String civico,String id, String cap, String città){
         this.Nome=nome;
-        this.Via=via+" n°"+civico;
+        this.Civico=civico;
+        this.Cap=cap;
+        this.Città=città;
+        this.Via=via+" n°"+civico+", "+cap+", "+città;
         this.Id=id;
 
     }
