@@ -12,4 +12,11 @@ android:layout_height="match_parent">
     android:layout_marginTop="149dp"
     tools:layout_editor_absoluteX="76dp"
     tools:layout_editor_absoluteY="152dp" />
+
+    <Button
+        android:id="@+id/buttoncarrello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Button" />
 </LinearLayout>

@@ -22,7 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2 {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -134,6 +134,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Bundle args = new Bundle();
         args.putString("negozio",s);
         fragmento.setArguments(args);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, fragmento);
+        fragmentTransaction.commit();
+    }
+    @Override
+    public void ongoCarrello() {
+        Carrello fragmento = new Carrello();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, fragmento);

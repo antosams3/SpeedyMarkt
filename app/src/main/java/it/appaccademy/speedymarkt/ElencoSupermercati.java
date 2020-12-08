@@ -40,7 +40,7 @@ public class ElencoSupermercati extends Fragment  {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_supermercati, container, false);
-
+        Carrello.carrello.clear();
         vettore=new ArrayList<singleRow>();
         elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
 

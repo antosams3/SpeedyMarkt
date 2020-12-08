@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 public class Prodotti extends Fragment {
     String negozio;
+    public static int quantitasum;
+    onFragmentBtnSelected2 listener;
     public static ListView elenco;
     public static ArrayList<singleRowProdotto> vettore;
     Button add;
@@ -39,10 +41,32 @@ public class Prodotti extends Fragment {
         if (getArguments() != null) {
             negozio = getArguments().getString("negozio_sel");
         }
+        Button carr=(Button)view.findViewById(R.id.buttoncarrello);
+        carr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.ongoCarrello();
+            }
+        });
         WorkerProdotto process = new WorkerProdotto(getContext());
         process.execute(negozio);
 
         return view;
+    }
+    @Override
+    public void onAttach( Context context) {
+        super.onAttach(context);
+        try  {
+            listener = (onFragmentBtnSelected2) context;
+
+        } catch(ClassCastException e) {
+            throw new ClassCastException(context.toString() + "ciao");
+        }
+
+    }
+
+    public interface onFragmentBtnSelected2{
+        public void ongoCarrello();
     }
 }
 
@@ -92,8 +116,6 @@ public class Prodotti extends Fragment {
 
         ArrayList<singleRowProdotto> list;
         Context c;
-
-
 
 
         public customAdapterProdotto(Context context,ArrayList<singleRowProdotto> L) {
@@ -170,6 +192,7 @@ public class Prodotti extends Fragment {
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
                     System.out.println("carrello: "+Carrello.carrello.toString());
                 }
+
             });
 
             return convertView;
