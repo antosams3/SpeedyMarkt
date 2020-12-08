@@ -15,14 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 
 public class Carta extends AppCompatActivity {
-    private static final String TAG = "Registrazione";
+    private static final String TAG = "Carta";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayDate;
     String email;
-    String titolare;
-    String scadenza;
-    String numero;
-    String cvv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +31,6 @@ public class Carta extends AppCompatActivity {
             email = extras.getString("email");
         }
 
-         scadenza = ((TextView) findViewById(R.id.scadenza)).getText().toString();
-         titolare = ((EditText) findViewById(R.id.titolare)).getText().toString();
-         numero = ((EditText) findViewById(R.id.numero)).getText().toString();
-         cvv = ((EditText) findViewById(R.id.cvv)).getText().toString();
 
         //Gestione calendario
         mDisplayDate = findViewById(R.id.scadenza);
@@ -54,6 +46,7 @@ public class Carta extends AppCompatActivity {
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year, month, day);
+                dialog.getDatePicker().findViewById(getResources().getIdentifier("day","id","android")).setVisibility(View.GONE);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -63,15 +56,20 @@ public class Carta extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 Log.d(TAG, "onDateSet: mm/yyyy: " + month + "/" + year);
-                String date = +month + "/" + year;
+                String date = + month + "/" + year;
                 mDisplayDate.setText(date);
             }
         };
 
 
+
     }
 
     public void checkcarta(View view) {
+        String scadenza = ((TextView) findViewById(R.id.scadenza)).getText().toString();
+        String titolare = ((EditText) findViewById(R.id.titolare)).getText().toString();
+        String numero = ((EditText) findViewById(R.id.numero)).getText().toString();
+        String cvv = ((EditText) findViewById(R.id.cvv)).getText().toString();
         //Thread
         Background backgroundWorker = new Background(this);
         backgroundWorker.execute("card", email, titolare, numero, scadenza, cvv);
