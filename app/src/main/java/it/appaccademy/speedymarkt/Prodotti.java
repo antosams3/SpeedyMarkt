@@ -23,6 +23,11 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static it.appaccademy.speedymarkt.MainActivity.Show_Counter;
+import static it.appaccademy.speedymarkt.MainActivity.carrello_count_number;
+import static it.appaccademy.speedymarkt.MainActivity.carrello_counter;
+import static it.appaccademy.speedymarkt.MainActivity.navigationView;
+
 public class Prodotti extends Fragment {
     String negozio;
     public static int quantitasum;
@@ -176,6 +181,13 @@ public class Prodotti extends Fragment {
                     }
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
                     System.out.println("carrello: "+Carrello.carrello.toString());
+
+                    carrello_count_number++;
+                    LayoutInflater li = LayoutInflater.from(v.getContext());
+                    carrello_counter = (TextView)li.inflate(R.layout.counter_carrello,null);
+                    navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
+                    Show_Counter(carrello_count_number);
+
                 }
             });
             ImageButton rem=(ImageButton)convertView.findViewById(R.id.buttonremove);
@@ -185,8 +197,16 @@ public class Prodotti extends Fragment {
                     if(Carrello.carrello.contains(list.get(position))){
                         Carrello.carrello.remove(list.get(position));
                         list.get(position).removeQuantita();
+                        carrello_count_number--;
+                        LayoutInflater li = LayoutInflater.from(v.getContext());
+                        carrello_counter = (TextView)li.inflate(R.layout.counter_carrello,null);
+                        navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
+                        Show_Counter(carrello_count_number);
                         if(list.get(position).getQuantita()>0){
                             Carrello.carrello.add(list.get(position));
+
+                            
+
                         }
                     }
                     qt.setText(String.valueOf(list.get(position).getQuantita()));

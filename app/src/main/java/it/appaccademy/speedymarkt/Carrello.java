@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class Carrello extends Fragment {
+
     String email;
     ListView elencocarrello;
     public static  ArrayList<singleRowProdotto> carrello=new ArrayList<>();
@@ -35,6 +36,7 @@ public class Carrello extends Fragment {
         System.out.println("tot: "+tot);
         elencocarrello = (ListView) view.findViewById(R.id.listview_elencocarrello);
         elencocarrello.setAdapter(new customAdapterCarrello(getContext(), Carrello.carrello));
+
         return view;
     }
 
