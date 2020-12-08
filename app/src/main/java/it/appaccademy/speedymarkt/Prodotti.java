@@ -51,14 +51,15 @@ public class Prodotti extends Fragment {
         String Nome;
         String Marchio;
         String Prezzo;
+        int quantitatot;
         int quantita=0;
 
 
-        singleRowProdotto(String marchio,String nome,String prezzo){
+        singleRowProdotto(String marchio,String nome,String prezzo,int qu){
             this.Nome=nome;
             this.Marchio=marchio;
             this.Prezzo=prezzo;
-
+            this.quantitatot=qu;
         }
 
         public String getNome(){
@@ -71,7 +72,9 @@ public class Prodotti extends Fragment {
             return Marchio;
         }
         public void addQuantita(){
-            quantita++;
+            if(quantita<quantitatot){
+                quantita++;
+            }
         }
         public void removeQuantita(){
             if(quantita!=0){
@@ -80,7 +83,7 @@ public class Prodotti extends Fragment {
 
         }
         public String toString(){
-            return "Nome: "+Nome+" Marchio: "+Marchio+" Prezzo: "+Prezzo;
+            return "Nome: "+Nome+" Marchio: "+Marchio+" Prezzo: "+Prezzo+" Quantita: "+quantita;
         }
     }
 
@@ -141,16 +144,31 @@ public class Prodotti extends Fragment {
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.get(position).addQuantita();
+                    if(!Carrello.carrello.contains(list.get(position))){
+                        list.get(position).addQuantita();
+                        Carrello.carrello.add(list.get(position));
+                    }else{
+                        Carrello.carrello.remove(list.get(position));
+                        list.get(position).addQuantita();
+                        Carrello.carrello.add(list.get(position));
+                    }
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
+                    System.out.println("carrello: "+Carrello.carrello.toString());
                 }
             });
             ImageButton rem=(ImageButton)convertView.findViewById(R.id.buttonremove);
             rem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    list.get(position).removeQuantita();
+                    if(Carrello.carrello.contains(list.get(position))){
+                        Carrello.carrello.remove(list.get(position));
+                        list.get(position).removeQuantita();
+                        if(list.get(position).getQuantita()>0){
+                            Carrello.carrello.add(list.get(position));
+                        }
+                    }
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
+                    System.out.println("carrello: "+Carrello.carrello.toString());
                 }
             });
 

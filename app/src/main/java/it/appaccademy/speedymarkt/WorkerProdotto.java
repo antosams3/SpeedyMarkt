@@ -33,6 +33,7 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
     String marchio="";
     String nome="";
     String prezzo="";
+    String quantita;
     singleRowProdotto ogg;
     ArrayList<singleRowProdotto> elenco;
 
@@ -77,10 +78,10 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
                     marchio = (String) JO.get("marchio");
                     nome = (String) JO.get("nome");
                     prezzo = (String) JO.get("prezzo");
-                    ogg = new singleRowProdotto(marchio, nome, prezzo);
+                    quantita=(String) JO.get("quantita");
+                    ogg = new singleRowProdotto(marchio, nome, prezzo,Integer.parseInt(quantita));
                     elenco.add(ogg);
                 }
-
             }
 
         } catch (MalformedURLException e) {

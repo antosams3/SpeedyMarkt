@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Carrello extends AppCompatActivity {
     String email;
+    public static  ArrayList<singleRowProdotto> carrello=new ArrayList<>();
     protected void onCreate(Bundle savedInstanceState) {
 
         //Prelievo dato email
