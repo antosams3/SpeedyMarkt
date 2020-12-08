@@ -48,7 +48,7 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
         try {
             negozio=params[0];
-            URL url = new URL("http://10.0.2.2/prodotti.php");
+            URL url = new URL("http://25.59.197.115/prodotti.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
