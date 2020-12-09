@@ -35,11 +35,11 @@ public class ElencoSupermercati extends Fragment  {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_supermercati, container, false);
+        MainActivity.carrello_count_number = 0;
         Carrello.carrello.clear();
         vettore=new ArrayList<singleRow>();
         elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);

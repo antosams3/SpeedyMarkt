@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -109,12 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        if(item.getItemId() == R.id.carrello){
-            Carrello fragment = new Carrello();
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, fragment);
-            fragmentTransaction.commit();
+        if(item.getItemId() == R.id.carrello) {
+            if (carrello_count_number != 0) {
+                Carrello fragment = new Carrello();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragment, fragment);
+                fragmentTransaction.commit();
+            } else Toast.makeText(this, "Devi prima selezionare dei prodotti!", Toast.LENGTH_SHORT).show();
         }
 
         if(item.getItemId() == R.id.notifiche){

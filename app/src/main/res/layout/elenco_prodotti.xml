@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<ListView
-    android:id="@+id/listview_elencoprodotti"
-    android:layout_width="355dp"
-    android:layout_height="653dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="149dp"
-    tools:layout_editor_absoluteX="76dp"
-    tools:layout_editor_absoluteY="152dp" />
+
+    <ListView
+        android:id="@+id/listview_elencoprodotti"
+        android:layout_width="355dp"
+        android:layout_height="520dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="149dp"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="152dp" />
+
 
     <Button
         android:id="@+id/buttoncarrello"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="680dp"
+        android:background="@drawable/rounded_buttons"
+        android:fontFamily="@font/open_sans_light"
+        android:hint="Vai al carrello"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        app:backgroundTint="@null" />
+
+    <ImageView
+        android:id="@+id/escl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
-</LinearLayout>
+        android:layout_marginLeft="32dp"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_baseline_report_24" />
+
+</RelativeLayout>
