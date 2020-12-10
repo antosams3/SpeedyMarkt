@@ -35,6 +35,10 @@ public class ElencoSupermercati extends Fragment  {
     public static ArrayList<singleRow> vettore;
     public String negozio;
     public String email;
+    public static String Nome;
+    public static String Via;
+    public static String Civico;
+    public static String Città;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,6 +87,8 @@ class singleRow {
     public String getVia(){
         return Via;
     }
+    public String getCivico(){return Civico;}
+    public String getCittà(){return Città;}
     public String toString(){
         return Nome+" "+Via;
     }
@@ -139,6 +145,8 @@ class customAdapter extends BaseAdapter {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
                 i.putExtra("negozio_sel",list.get(position).getId());
+                i.putExtra("nome", list.get(position).getNome());
+                i.putExtra("via", list.get(position).getVia());
                 i.putExtra("email",MainActivity.email);
                 c.startActivity(i);
 

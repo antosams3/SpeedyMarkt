@@ -41,6 +41,7 @@ public class Prodotti extends Fragment {
     public static ArrayList<singleRowProdotto> vettore;
     public static ImageView escl;
     Button add;
+    String nome, via;
     public int tot;
 
     @Nullable
@@ -55,12 +56,19 @@ public class Prodotti extends Fragment {
         if (getArguments() != null) {
             negozio = getArguments().getString("negozio_sel");
         }
+        if (getArguments() != null) {
+            nome = getArguments().getString("nome");
+        }
+        if (getArguments() != null) {
+            via = getArguments().getString("via");
+        }
+
         carr=(Button)view.findViewById(R.id.buttoncarrello);
         carr.setVisibility(View.GONE);
         carr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.ongoCarrello();
+                listener.ongoCarrello(nome, via);
             }
         });
         WorkerProdotto process = new WorkerProdotto(getContext());
@@ -83,7 +91,7 @@ public class Prodotti extends Fragment {
     }
 
     public interface onFragmentBtnSelected2{
-        public void ongoCarrello();
+        public void ongoCarrello(String nome, String via);
     }
 }
 

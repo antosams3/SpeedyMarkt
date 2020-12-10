@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel;
+    String negozio_sel, nome, via;
     public static int  carrello_count_number=0;
     public static TextView carrello_counter;
 
@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (extras != null) {
             email = extras.getString("email");
             negozio_sel = extras.getString("negozio_sel");
+            nome = extras.getString("nome");
+            via = extras.getString("via");
+
         }
 
         if(negozio_sel!=null){
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle args = new Bundle();
             args.putString("email", email);
             args.putString("negozio_sel",negozio_sel);
+            args.putString("nome",nome);
+            args.putString("via",via);
             fragmenti.setArguments(args);
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
@@ -158,8 +163,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
     @Override
-    public void ongoCarrello() {
+    public void ongoCarrello(String nome, String via) {
         Carrello fragmento = new Carrello();
+        Bundle args = new Bundle();
+        args.putString("nome", nome);
+        fragmento.setArguments(args);
+        args.putString("via", via);
+        fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_fragment, fragmento);
