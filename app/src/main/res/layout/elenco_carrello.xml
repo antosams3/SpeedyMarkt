@@ -13,18 +13,46 @@
         android:layout_marginTop="149dp"
         tools:layout_editor_absoluteX="76dp"
         tools:layout_editor_absoluteY="152dp">
+
     </ListView>
 
     <TextView
         android:id="@+id/price"
         android:layout_width="217dp"
         android:layout_height="74dp"
-        android:layout_marginStart="220dp"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="680dp"
+        android:layout_marginStart="235dp"
+        android:layout_marginLeft="235dp"
+        android:layout_marginTop="678dp"
         android:layout_marginRight="0dp"
         android:text="18,99€"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="40sp" />
+
+
+    <Button
+        android:id="@+id/buttonpagamento"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="683dp"
+        android:background="@drawable/rounded_buttons"
+        android:fontFamily="@font/open_sans_light"
+        android:hint="Vai al pagamento"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        app:backgroundTint="@null" />
+
+    <TextView
+        android:id="@+id/datisuperm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="90dp"
+        android:textSize="19sp"
+        android:textColor="#FFFFFF"
+        android:text="Ordina presso: Re del pane, lungomare dalmazia 64, Mola di Bari" />
 
 </RelativeLayout>

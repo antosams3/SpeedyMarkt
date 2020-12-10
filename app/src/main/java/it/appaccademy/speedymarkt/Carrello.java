@@ -17,28 +17,43 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.floor;
+
 public class Carrello extends Fragment {
     TextView prezzo;
     String email;
     ListView elencocarrello;
+    TextView datisuperm;
+    String nome, via, civico, città;
     public static  ArrayList<singleRowProdotto> carrello=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_carrello, container, false);
+
+        if (getArguments() != null) {
+           nome = getArguments().getString("nome");
+        }
+        if (getArguments() != null) {
+            via = getArguments().getString("via");
+        }
+
         int tot=0;
         for(int i=0;i<carrello.size();i++){
             tot=tot+carrello.get(i).getQuantita();
         }
-        int prezzotot=0;
+        double prezzotot=0.0;
         for(int i=0;i<carrello.size();i++){
-            prezzotot = prezzotot + ((carrello.get(i).getQuantita()) * Integer.parseInt(carrello.get(i).getPrezzo()));
+            prezzotot = prezzotot + ((carrello.get(i).getQuantita()) * Double.parseDouble(carrello.get(i).getPrezzo()));
         }
         System.out.println(prezzotot);
         System.out.println("tot: "+tot);
 
+
+        datisuperm = (TextView) view.findViewById(R.id.datisuperm);
+        datisuperm.setText("Stai ordinando da: "+nome+", "+via);
         prezzo = (TextView) view.findViewById(R.id.price);
-        prezzo.setText(String.valueOf(prezzotot)+"€");
+        prezzo.setText(String.valueOf(Math.floor(prezzotot * 100)/100+"€"));
 
         elencocarrello = (ListView) view.findViewById(R.id.listview_elencocarrello);
         elencocarrello.setAdapter(new customAdapterCarrello(getContext(), Carrello.carrello));
