@@ -1,73 +1,46 @@
 package it.appaccademy.speedymarkt;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-public class Inserimento_prodotti extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Inserimento_prodotti extends Fragment {
 
     EditText EtEan, EtMarchio, EtNome, EtPrezzo, EtQuantita;
     String negozio, email, nome, via;
+    public static ListView elenco;
+    public static ArrayList<singleRow> vettore;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.inserimento_prodotti);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.ip_seleziona_supermercato, container, false);
 
-        //Prelievo dato email
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            email = extras.getString("email");
-        }
+        EtEan = (EditText) view.findViewById(R.id.etEan);
+        EtMarchio = (EditText) view.findViewById(R.id.etMarchio);
+        EtNome = (EditText) view.findViewById(R.id.etProdotto);
+        EtPrezzo = (EditText) view.findViewById(R.id.etPrezzo);
+        EtQuantita = (EditText) view.findViewById(R.id.etQuantita);
 
-        EtEan = (EditText) findViewById(R.id.etEan);
-        EtMarchio = (EditText) findViewById(R.id.etMarchio);
-        EtNome = (EditText) findViewById(R.id.etProdotto);
-        EtPrezzo = (EditText) findViewById(R.id.etPrezzo);
-        EtQuantita = (EditText) findViewById(R.id.etQuantita);
+
+        vettore=new ArrayList<singleRow>();
+        elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
+
+
+
+
+        Lavoratore process = new Lavoratore(getContext());
+        process.execute("elencosupermercati",MainActivity.email);
+        return view;
     }
 
-    public void aggiungiProdotto(View view) {
-        String ean = EtEan.getText().toString();
-        String marchio = EtMarchio.getText().toString();
-        String nome = EtNome.getText().toString();
-        String prezzo = EtPrezzo.getText().toString();
-        String quantita = EtQuantita.getText().toString();
-        String type = "insert_product";
-
-        //Thread
-        Background backgroundWorker = new Background(this);
-        backgroundWorker.execute(type, ean, marchio, nome, prezzo, quantita, "1", email);
-    }
-
-    //Passaggio dato email a Ricercasupermercati
-    public void goHome(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Passaggio dato email a Profilo
-    public void visitaProfilo(View view) {
-        Intent intent = new Intent(this, Profilo.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Passaggio dato email a Accesso_admin
-    public void goAdmin(View view) {
-        Intent intent = new Intent(this, Accesso_admin.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
-
-    //Passaggio dato email a Carrello
-    public void goCarrello(View view) {
-        Intent intent = new Intent(this, Carrello.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
-    }
 }

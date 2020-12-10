@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(item.getItemId() == R.id.inserisci_attivita){
-            Notifica fragment = new Notifica();
+            Inserimento_attivita fragment = new Inserimento_attivita();
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, fragment);
@@ -141,7 +141,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(item.getItemId() == R.id.inserisci_prodotto){
-
+            Inserimento_prodotti fragment = new Inserimento_prodotti();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragment);
+            fragmentTransaction.commit();
+        }
+        if(item.getItemId() == R.id.visualizza_ordini){
+            visualizza_ordini fragment = new visualizza_ordini();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragment);
+            fragmentTransaction.commit();
         }
         return true;
     }

@@ -37,7 +37,7 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
     protected Void doInBackground(String... params) {
         try {
             email = params[0];
-            URL url = new URL("http://25.59.197.115/profilo.php");
+            URL url = new URL("http://10.0.2.2/profilo.php");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);

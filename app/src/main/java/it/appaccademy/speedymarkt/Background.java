@@ -48,7 +48,7 @@ public class Background extends AsyncTask<String, Void, String> {
              */
 
             case "login":
-                String login_url = "http://25.59.197.115/login.php";
+                String login_url = "http://10.0.2.2/login.php";
                 try {
                     user_name = params[1];
                     String password = params[2];
@@ -89,7 +89,7 @@ public class Background extends AsyncTask<String, Void, String> {
              ****************************
              */
             case "insert":
-                login_url = "http://25.59.197.115/register.php";
+                login_url = "http://10.0.2.2/register.php";
                 try {
                     String nome = params[1];
                     String cognome = params[2];
@@ -135,7 +135,7 @@ public class Background extends AsyncTask<String, Void, String> {
              */
 
             case "card":
-                login_url = "http://25.59.197.115/card.php";
+                login_url = "http://10.0.2.2/card.php";
                 try {
                     email_card = params[1];
                     String titolare = params[2];
@@ -179,7 +179,7 @@ public class Background extends AsyncTask<String, Void, String> {
              ****************************
              */
             case "tipo":
-                login_url = "http://25.59.197.115/login.php";
+                login_url = "http://10.0.2.2/login.php";
                 try {
                     String user_name = params[1];
                     String password = params[2];
@@ -221,7 +221,7 @@ public class Background extends AsyncTask<String, Void, String> {
              ******************************
              */
             case "insert_product":
-                login_url = "http://25.59.197.115/insertproduct.php";
+                login_url = "http://10.0.2.2/insertproduct.php";
                 try {
                     String ean = params[1];
                     String marchio = params[2];
@@ -268,7 +268,7 @@ public class Background extends AsyncTask<String, Void, String> {
              ******************************
              */
             case "insert_activity":
-                login_url = "http://25.59.197.115/housekeeping.php";
+                login_url = "http://10.0.2.2/housekeeping.php";
 
                 try {
                     String nome = params[1];
