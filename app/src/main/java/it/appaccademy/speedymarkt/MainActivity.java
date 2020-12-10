@@ -10,8 +10,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -20,19 +23,23 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2 {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
-    NavigationView navigationView;
+    public static NavigationView navigationView;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
     String negozio_sel;
+    public static int  carrello_count_number=0;
+    public static TextView carrello_counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
-        if(item.getItemId() == R.id.carrello){
-
+        if(item.getItemId() == R.id.carrello) {
+            if (carrello_count_number != 0) {
+                Carrello fragment = new Carrello();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_fragment, fragment);
+                fragmentTransaction.commit();
+            } else Toast.makeText(this, "Devi prima selezionare dei prodotti!", Toast.LENGTH_SHORT).show();
         }
 
         if(item.getItemId() == R.id.notifiche){
@@ -115,10 +128,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, SchermataIniziale.class);
             startActivity(intent);
 
-            
+
         }
 
         if(item.getItemId() == R.id.inserisci_attivita){
+            Notifica fragment = new Notifica();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragment);
+            fragmentTransaction.commit();
 
         }
 
@@ -149,6 +167,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public static void  Show_Counter(int carrcount_number) {
+    if(carrcount_number>0) {
+       carrello_counter.setText(carrcount_number+"");
+    } else {
+        carrello_counter.setText("");
+    }
+
+
+    }
 
 
 }

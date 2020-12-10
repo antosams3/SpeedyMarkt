@@ -2,13 +2,17 @@ package it.appaccademy.speedymarkt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,25 +27,36 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static it.appaccademy.speedymarkt.MainActivity.Show_Counter;
+import static it.appaccademy.speedymarkt.MainActivity.carrello_count_number;
+import static it.appaccademy.speedymarkt.MainActivity.carrello_counter;
+import static it.appaccademy.speedymarkt.MainActivity.navigationView;
+
 public class Prodotti extends Fragment {
     String negozio;
     public static int quantitasum;
     onFragmentBtnSelected2 listener;
+    static Button carr;
     public static ListView elenco;
     public static ArrayList<singleRowProdotto> vettore;
+    public static ImageView escl;
     Button add;
     public int tot;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_prodotti, container, false);
+        MainActivity.carrello_count_number = 0;
+        escl = (ImageView) view.findViewById(R.id.escl);
         tot=0;
         vettore = new ArrayList<singleRowProdotto>();
         elenco = (ListView) view.findViewById(R.id.listview_elencoprodotti);
         if (getArguments() != null) {
             negozio = getArguments().getString("negozio_sel");
         }
-        Button carr=(Button)view.findViewById(R.id.buttoncarrello);
+        carr=(Button)view.findViewById(R.id.buttoncarrello);
+        carr.setVisibility(View.GONE);
         carr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,9 +65,11 @@ public class Prodotti extends Fragment {
         });
         WorkerProdotto process = new WorkerProdotto(getContext());
         process.execute(negozio);
-
         return view;
     }
+
+
+
     @Override
     public void onAttach( Context context) {
         super.onAttach(context);
@@ -86,6 +103,7 @@ public class Prodotti extends Fragment {
             this.quantitatot=qu;
         }
 
+        public String getPrezzo() {return Prezzo;}
         public String getNome(){
             return Nome;
         }
@@ -113,7 +131,6 @@ public class Prodotti extends Fragment {
 
 
     class customAdapterProdotto extends BaseAdapter {
-
         ArrayList<singleRowProdotto> list;
         Context c;
 
@@ -141,6 +158,7 @@ public class Prodotti extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
             LayoutInflater layoutInflater= LayoutInflater.from(c);
             if(convertView==null){
                 convertView=layoutInflater.inflate(R.layout.singlerow_prodotto,parent,false);
@@ -149,10 +167,12 @@ public class Prodotti extends Fragment {
             TextView nome=(TextView)convertView.findViewById(R.id.nome);
             TextView marchio=(TextView)convertView.findViewById(R.id.marchio);
             TextView qt=(TextView) convertView.findViewById(R.id.quantita);
+            TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
             qt.setText(String.valueOf(list.get(position).getQuantita()));
             singleRowProdotto tmp=list.get(position);
             nome.setText(tmp.Nome);
             marchio.setText(tmp.Marchio);
+            prezzo.setText((String.valueOf(list.get(position).getPrezzo()))+"€");
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -162,21 +182,41 @@ public class Prodotti extends Fragment {
                     //c.startActivity(i);
                 }
             });
+
+
             ImageButton add=(ImageButton)convertView.findViewById(R.id.buttonadd);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!Carrello.carrello.contains(list.get(position))){
+                    if (!Carrello.carrello.contains(list.get(position))) {
                         list.get(position).addQuantita();
                         Carrello.carrello.add(list.get(position));
-                    }else{
+                    } else {
                         Carrello.carrello.remove(list.get(position));
                         list.get(position).addQuantita();
                         Carrello.carrello.add(list.get(position));
                     }
+
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
-                    System.out.println("carrello: "+Carrello.carrello.toString());
+                    System.out.println("carrello: " + Carrello.carrello.toString());
+
+                    carrello_count_number++;
+                    LayoutInflater li = LayoutInflater.from(v.getContext());
+                    carrello_counter = (TextView) li.inflate(R.layout.counter_carrello, null);
+                    navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
+                    Show_Counter(carrello_count_number);
+
+                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == View.GONE) {
+                        Prodotti.escl.setVisibility(View.VISIBLE);
+                        Prodotti.carr.setVisibility(View.VISIBLE);
+                        Animation slideinleft1 = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_in_left);
+                        Animation slideinright = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_in_right);
+                        Prodotti.carr.startAnimation(slideinleft1);
+                        Prodotti.escl.startAnimation(slideinright);
+
+                    }
                 }
+
             });
             ImageButton rem=(ImageButton)convertView.findViewById(R.id.buttonremove);
             rem.setOnClickListener(new View.OnClickListener() {
@@ -185,19 +225,39 @@ public class Prodotti extends Fragment {
                     if(Carrello.carrello.contains(list.get(position))){
                         Carrello.carrello.remove(list.get(position));
                         list.get(position).removeQuantita();
+                        carrello_count_number--;
+                        LayoutInflater li = LayoutInflater.from(v.getContext());
+                        carrello_counter = (TextView)li.inflate(R.layout.counter_carrello,null);
+                        navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
+                        Show_Counter(carrello_count_number);
+                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == View.GONE) {
+                            Prodotti.escl.setVisibility(View.VISIBLE);
+                        }
+                        if (carrello_count_number == 0){
+                            Prodotti.escl.setVisibility(View.GONE);
+                            Prodotti.carr.setVisibility(View.GONE);
+                            Animation slideoutleft1 = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_out_left);
+                            Animation slideoutright = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_out_right);
+                            Prodotti.carr.startAnimation(slideoutleft1);
+                            Prodotti.escl.startAnimation(slideoutright);
+                        }
                         if(list.get(position).getQuantita()>0){
                             Carrello.carrello.add(list.get(position));
+
+
+
                         }
                     }
+
                     qt.setText(String.valueOf(list.get(position).getQuantita()));
                     System.out.println("carrello: "+Carrello.carrello.toString());
                 }
 
             });
 
+
             return convertView;
         }
-
 
 
 

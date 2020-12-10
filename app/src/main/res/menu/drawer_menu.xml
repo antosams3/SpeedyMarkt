@@ -13,7 +13,8 @@
     <item
         android:id="@+id/carrello"
         android:icon="@drawable/ic_baseline_add_shopping_cart_24"
-        android:title="Carrello" />
+        android:title="Carrello"
+        />
             <item
                 android:id="@+id/notifiche"
                 android:icon="@drawable/ic_baseline_notifications_active_24"
