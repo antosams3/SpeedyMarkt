@@ -1,8 +1,6 @@
 package it.appaccademy.speedymarkt;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -63,7 +57,7 @@ public class Prodotti extends Fragment {
             via = getArguments().getString("via");
         }
 
-        carr=(Button)view.findViewById(R.id.buttoncarrello);
+        carr=(Button)view.findViewById(R.id.buttonpaga1);
         carr.setVisibility(View.GONE);
         carr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,17 +94,20 @@ public class Prodotti extends Fragment {
         String Nome;
         String Marchio;
         String Prezzo;
+        String Ean;
         int quantitatot;
         int quantita=0;
 
 
-        singleRowProdotto(String marchio,String nome,String prezzo,int qu){
+        singleRowProdotto(String ean, String marchio,String nome,String prezzo,int qu){
+            this.Ean = ean;
             this.Nome=nome;
             this.Marchio=marchio;
             this.Prezzo=prezzo;
             this.quantitatot=qu;
         }
 
+        public String getEan() {return Ean;}
         public String getPrezzo() {return Prezzo;}
         public String getNome(){
             return Nome;
@@ -133,7 +130,7 @@ public class Prodotti extends Fragment {
 
         }
         public String toString(){
-            return "Nome: "+Nome+" Marchio: "+Marchio+" Prezzo: "+Prezzo+" Quantita: "+quantita;
+            return "Ean: "+Ean+" Nome: "+Nome+" Marchio: "+Marchio+" Prezzo: "+Prezzo+" Quantita: "+quantita;
         }
     }
 

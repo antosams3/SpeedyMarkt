@@ -7,6 +7,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2 {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2, Carrello.onFragmentBtnSelected3, Pagamento.onFragmentBtnSelected3{
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -126,7 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if(item.getItemId() == R.id.notifiche){
-
+            Pagamento fragment = new Pagamento();
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragment);
+            fragmentTransaction.commit();
         }
 
         if(item.getItemId() == R.id.esci){
@@ -177,8 +182,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void ongoCarrello(String nome, String via) {
         Carrello fragmento = new Carrello();
         Bundle args = new Bundle();
+        args.putString("email", email);
         args.putString("nome", nome);
-        fragmento.setArguments(args);
         args.putString("via", via);
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
@@ -199,4 +204,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void ongoPagamento(String idOrdine, String email, String prezzoNonArr) {
+        System.out.println("DATI DA IN MAIN DA PASSARE AL BACKGROUNDWORKER MAIN: "+email+" "+prezzoNonArr);
+        Pagamento fragmento = new Pagamento();
+        Bundle args = new Bundle();
+        args.putString("idOrdine", idOrdine);
+        args.putString("email", email);
+        args.putString("prezzoNonArr", prezzoNonArr);
+        fragmento.setArguments(args);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, fragmento);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void ongoAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("SpeedyMarkt:");
+        alertDialog.setMessage("Grazie per aver testato la beta di SpeedyMarkt!\n\nPresto nuovi aggiornamenti.");
+        alertDialog.show();
+    }
 }

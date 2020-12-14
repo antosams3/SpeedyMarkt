@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/price2"
+        android:layout_width="160dp"
+        android:layout_height="74dp"
+        android:text="18,99€"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonpaga1"
+        app:layout_constraintVertical_bias="0.089" />
+
+    <ImageView
+        android:id="@+id/qrPlaceHolder"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933"
+        app:srcCompat="@android:drawable/screen_background_dark" />
+
+    <Button
+        android:id="@+id/buttonpaga2"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_buttons2"
+        android:fontFamily="@font/open_sans_light"
+        android:hint="Paga in loco"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewc1"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <TextView
+        android:id="@+id/textViewa1"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:background="@drawable/homecont1"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.220" />
+
+    <Button
+        android:id="@+id/buttonpaga1"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_buttons"
+        android:fontFamily="@font/open_sans_light"
+        android:hint="Paga ora"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="18sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewc1"
+        app:layout_constraintVertical_bias="0.027" />
+
+    <TextView
+        android:id="@+id/textViewc1"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:background="@drawable/homecont3"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewb1"
+        app:layout_constraintVertical_bias="0.004" />
+
+    <TextView
+        android:id="@+id/textViewb1"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:background="@drawable/homecont2"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.005" />
+
+    <TextView
+        android:id="@+id/textViewc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Conserva il codice QR:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewc1"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/textViewc1"
+        app:layout_constraintTop_toTopOf="@+id/textViewc1"
+        app:layout_constraintVertical_bias="0.16" />
+
+    <TextView
+        android:id="@+id/textViewx4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="verificare i dettagli del tuo ordine."
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewc1"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="@+id/textViewc1"
+        app:layout_constraintTop_toTopOf="@+id/textViewc1"
+        app:layout_constraintVertical_bias="0.836" />
+
+    <TextView
+        android:id="@+id/textViewc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mostralo ad un addetto in negozio perchè possa"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewc1"
+        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintStart_toStartOf="@+id/textViewc1"
+        app:layout_constraintTop_toTopOf="@+id/textViewc1"
+        app:layout_constraintVertical_bias="0.524" />
+
+    <TextView
+        android:id="@+id/textViewa3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clicca su &quot;Paga ora&quot; per acquistare l'ordine"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewa1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewa1"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toStartOf="@+id/textViewa1"
+        app:layout_constraintTop_toTopOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.557" />
+
+    <TextView
+        android:id="@+id/textViewa2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paga ora!"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewa1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewa1"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="@+id/textViewa1"
+        app:layout_constraintTop_toTopOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <TextView
+        android:id="@+id/textViewa4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tramite il metodo di pagamento registrato."
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewa1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewa1"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="@+id/textViewa1"
+        app:layout_constraintTop_toTopOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.868" />
+
+    <TextView
+        android:id="@+id/textViewb3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paga la spesa direttamente in negozio tramite il"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewb1"
+        app:layout_constraintStart_toStartOf="@+id/textViewb1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.532" />
+
+    <TextView
+        android:id="@+id/textViewb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paga in loco!"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewb1"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="@+id/textViewb1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.166" />
+
+    <TextView
+        android:id="@+id/textViewb4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="servizio di pagamento in loco di SpeedyMarkt"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewc1"
+        app:layout_constraintEnd_toEndOf="@+id/textViewb1"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="@+id/textViewb1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewa1"
+        app:layout_constraintVertical_bias="0.815" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="214dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

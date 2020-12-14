@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,21 +16,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static java.lang.Math.floor;
 
 public class Carrello extends Fragment {
+    private onFragmentBtnSelected3 listener;
     TextView prezzo;
     String email;
     ListView elencocarrello;
     TextView datisuperm;
     String nome, via, civico, città;
+    UUID code;
+    String idOrdine;
     public static  ArrayList<singleRowProdotto> carrello=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.elenco_carrello, container, false);
+
+
+        if (getArguments() != null) {
+            email = getArguments().getString("email");
+        }
 
         if (getArguments() != null) {
            nome = getArguments().getString("nome");
@@ -49,6 +60,7 @@ public class Carrello extends Fragment {
         System.out.println(prezzotot);
         System.out.println("tot: "+tot);
 
+        String prezzoNonArr = String.valueOf(prezzotot);
 
         datisuperm = (TextView) view.findViewById(R.id.datisuperm);
         datisuperm.setText("Stai ordinando da: "+nome+", "+via);
@@ -58,12 +70,38 @@ public class Carrello extends Fragment {
         elencocarrello = (ListView) view.findViewById(R.id.listview_elencocarrello);
         elencocarrello.setAdapter(new customAdapterCarrello(getContext(), Carrello.carrello));
 
+        Button buttonpagamento = view.findViewById(R.id.buttonpagamento);
+        buttonpagamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Al click su "vai al pagamento" viene generato automaticamente l'id dell'ordine
+                code = UUID.randomUUID();
+                idOrdine = code.toString().substring(0,8);
+                listener.ongoPagamento(idOrdine, email, prezzoNonArr);
+            }
+        });
+
+        System.out.println("DATI DA PASSARE A MAIN: "+email+" "+prezzoNonArr);
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(context instanceof onFragmentBtnSelected3) {
+            listener = (onFragmentBtnSelected3) context;
+        } else {
+            throw new ClassCastException(context.toString() +"ciao");
+        }
+    }
+
+    public interface onFragmentBtnSelected3{
+        public void ongoPagamento(String idOrdine, String email, String prezzoNonArr);
     }
 
     class customAdapterCarrello extends BaseAdapter {
 
-        ArrayList<singleRowProdotto> list;
+        public ArrayList<singleRowProdotto> list;
         Context c;
 
 
@@ -71,6 +109,9 @@ public class Carrello extends Fragment {
             c = context;
             list = L;
         }
+
+
+        public ArrayList<singleRowProdotto> getList(){return list;}
 
 
         @Override

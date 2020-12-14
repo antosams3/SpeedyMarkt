@@ -11,24 +11,22 @@
                 <stroke
                     android:width="0.7dp"
                     android:color="#BDBDBD" />
-                <corners
-                    android:radius="7dp" />
+
             </shape>
         </item>
 
         <item android:state_pressed="false" android:state_focused="false">
             <shape>
                 <gradient
-                    android:startColor="#C327B4"
-                    android:centerColor="#8B33AF"
-                    android:endColor="#2B48A5"
+                    android:startColor="#FFC819"
+                    android:centerColor="#FAAC20"
+                    android:endColor="#F38A29"
                     android:angle="0"
                     />
                 <stroke
                     android:width="0.7dp"
                     android:color="#BDBDBD" />
-                <corners
-                    android:radius="7dp" />
+
             </shape>
         </item>
 

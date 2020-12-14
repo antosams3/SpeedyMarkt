@@ -34,6 +34,7 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
     String nome="";
     String prezzo="";
     String quantita;
+    String ean ="";
     singleRowProdotto ogg;
     ArrayList<singleRowProdotto> elenco;
 
@@ -75,11 +76,12 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
                 elenco = new ArrayList<>();
                 for (int i = 0; i < JA.length(); i++) {
                     JSONObject JO = (JSONObject) JA.get(i);
+                    ean = (String) JO.get("ean");
                     marchio = (String) JO.get("marchio");
                     nome = (String) JO.get("nome");
                     prezzo = (String) JO.get("prezzo");
                     quantita=(String) JO.get("quantita");
-                    ogg = new singleRowProdotto(marchio, nome, prezzo,Integer.parseInt(quantita));
+                    ogg = new singleRowProdotto(ean, marchio, nome, prezzo,Integer.parseInt(quantita));
                     elenco.add(ogg);
                 }
             }
