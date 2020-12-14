@@ -150,8 +150,6 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
             }
         }
 
-
-
         return null;
 
 }
@@ -170,12 +168,12 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                 for (int i=0; i < elenco.size(); i++){
                     Inserimento_prodotti.vettore.add(elenco.get(i));
                 }
-                Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore));
+                Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore,"TRUE"));
             }else{
                 for (int i=0; i < elenco.size(); i++){
                     vettore.add(elenco.get(i));
                 }
-                ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore));
+                ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore,"FALSE"));
             }
 
         }

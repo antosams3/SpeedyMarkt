@@ -102,11 +102,12 @@ class customAdapter extends BaseAdapter {
     Context c;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    String from="FALSE";
 
-
-    public customAdapter(Context context,ArrayList<singleRow> L) {
+    public customAdapter(Context context,ArrayList<singleRow> L,String from) {
         c=context;
         list=L;
+        this.from=from;
     }
     public interface EventListener {
         void onEvent(int data);
@@ -143,12 +144,15 @@ class customAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(),"Hai selezionato : "+list.get(position).getNome(),Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(c,MainActivity.class);
-                i.putExtra("negozio_sel",list.get(position).getId());
-                i.putExtra("nome", list.get(position).getNome());
-                i.putExtra("via", list.get(position).getVia());
-                i.putExtra("email",MainActivity.email);
-                c.startActivity(i);
+
+                    Intent i=new Intent(c,MainActivity.class);
+                    i.putExtra("negozio_sel",list.get(position).getId());
+                    i.putExtra("nome", list.get(position).getNome());
+                    i.putExtra("via", list.get(position).getVia());
+                    i.putExtra("email",MainActivity.email);
+                    i.putExtra("from",from);
+                    i.putExtra("id",list.get(position).getId());
+                    c.startActivity(i);
 
             }
         });
