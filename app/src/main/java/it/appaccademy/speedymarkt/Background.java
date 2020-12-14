@@ -341,17 +341,17 @@ public class Background extends AsyncTask<String, Void, String> {
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_attivita con dato email
-        if (result.equals("Attivita' inserita correttamente!")) {
+        if (result.equals("Completato")) {
             Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
-            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            context.startActivity(intent);
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_prodotto con dato email
         if (result.equals("Prodotto inserito con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
-            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            context.startActivity(intent);
 
         }
 

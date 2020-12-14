@@ -3,7 +3,6 @@ package it.appaccademy.speedymarkt;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -38,7 +37,12 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     String cap;
     String città;
     singleRow ogg;
+    singleRowOrdine ord;
+    String idattivita;
+    String idordine;
+    String emailutente;
     ArrayList<singleRow> elenco;
+    ArrayList<singleRowOrdine> elencoordini;
     boolean cond=false;
    
 
@@ -49,7 +53,8 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     
     @Override
     protected Void doInBackground(String... params) {
-        if(params[0].equals("elencosupermercati")){
+        switch(params[0]){
+            case "elencosupermercati":
             try {
                 email=params[1];
                 cond=true;
@@ -99,9 +104,10 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }else{
+        break;
+            case "elenco_attivita":
             try {
-                negozio=params[0];
+                negozio=params[1];
                 URL url = new URL("http://10.0.2.2/negozio.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -148,6 +154,53 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            break;
+            case "elenco_ordini":
+                try {
+                    idattivita=params[1];
+                    URL url = new URL("http://10.0.2.2/ordini.php");
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setDoInput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String post_data = URLEncoder.encode("idattivita", "UTF-8") + "=" + URLEncoder.encode(idattivita, "UTF-8");
+                    bufferedWriter.write(post_data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line = "";
+                    while(line != null){
+                        line = bufferedReader.readLine();
+                        if(line!=null) {
+                            data = data + line;
+                        }
+                    }
+                    if(!(data.equals("Nessun risultato"))) {
+                        JSONArray JA = new JSONArray(data);
+                        elencoordini = new ArrayList<>();
+                        for (int i = 0; i < JA.length(); i++) {
+                            JSONObject JO = (JSONObject) JA.get(i);
+                            idordine = (String) JO.get("nome");
+                            emailutente = (String) JO.get("via");
+                            ord = new singleRowOrdine(idordine, emailutente);
+                            elenco.add(ogg);
+                            //dataParsed = dataParsed + singleParsed;
+                        }
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
         }
 
         return null;

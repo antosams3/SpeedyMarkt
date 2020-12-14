@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/nome"
+        android:id="@+id/sro_idordine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -20,7 +20,7 @@
         android:id="@+id/marchio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nome"
+        android:layout_below="@+id/sro_idordine"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/open_sans_light"

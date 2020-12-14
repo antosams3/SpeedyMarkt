@@ -1,17 +1,12 @@
 package it.appaccademy.speedymarkt;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,15 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class ElencoSupermercati extends Fragment  {
 
@@ -54,7 +45,7 @@ public class ElencoSupermercati extends Fragment  {
         }
 
         Lavoratore process = new Lavoratore(getContext());
-        process.execute(negozio);
+        process.execute("elenco_attivita",negozio);
     return view;
     }
 }
@@ -135,8 +126,8 @@ class customAdapter extends BaseAdapter {
             convertView=layoutInflater.inflate(R.layout.singlerow,parent,false);
         }
 
-        TextView nome=(TextView)convertView.findViewById(R.id.nome);
-        TextView via=(TextView)convertView.findViewById(R.id.via);
+        TextView nome=(TextView)convertView.findViewById(R.id.sro_idordine);
+        TextView via=(TextView)convertView.findViewById(R.id.sro_utente);
         singleRow tmp=list.get(position);
         nome.setText(tmp.Nome);
         via.setText(tmp.Via);

@@ -2,7 +2,6 @@ package it.appaccademy.speedymarkt;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -173,7 +172,7 @@ public class Prodotti extends Fragment {
                 convertView=layoutInflater.inflate(R.layout.singlerow_prodotto,parent,false);
             }
 
-            TextView nome=(TextView)convertView.findViewById(R.id.nome);
+            TextView nome=(TextView)convertView.findViewById(R.id.sro_idordine);
             TextView marchio=(TextView)convertView.findViewById(R.id.marchio);
             TextView qt=(TextView) convertView.findViewById(R.id.quantita);
             TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);

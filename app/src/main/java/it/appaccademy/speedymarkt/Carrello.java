@@ -16,11 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
-
-import static java.lang.Math.floor;
 
 public class Carrello extends Fragment {
     private onFragmentBtnSelected3 listener;
@@ -137,7 +134,7 @@ public class Carrello extends Fragment {
                 convertView = layoutInflater.inflate(R.layout.singlerow_prodotto, parent, false);
             }
 
-            TextView nome = (TextView) convertView.findViewById(R.id.nome);
+            TextView nome = (TextView) convertView.findViewById(R.id.sro_idordine);
             TextView marchio = (TextView) convertView.findViewById(R.id.marchio);
             TextView qt = (TextView) convertView.findViewById(R.id.quantita);
             TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
