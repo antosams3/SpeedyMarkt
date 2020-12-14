@@ -1,30 +1,22 @@
 package it.appaccademy.speedymarkt;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -38,12 +30,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel, nome, via,id;
+    String negozio_sel, nome, via,id,esitoInsert;
     public static int  carrello_count_number=0;
     public static TextView carrello_counter;
     String cond;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
@@ -78,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             id=extras.getString("id");
 
         }
+
+
 
         if(negozio_sel!=null&&cond.equals("FALSE")){
             Prodotti fragmenti = new Prodotti();
@@ -208,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
 
     }
+
 
     public static void  Show_Counter(int carrcount_number) {
     if(carrcount_number>0) {

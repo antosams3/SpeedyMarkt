@@ -14,10 +14,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Registrazione" />
         <activity android:name=".Carta" />
-        <activity android:name=".Carrello" />
         <activity android:name=".Accesso_admin" />
-        <activity android:name=".Inserimento_prodotti" />
-        <activity android:name=".Inserimento_attivita" />
+
             <activity android:name=".SchermataIniziale" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

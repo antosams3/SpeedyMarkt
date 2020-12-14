@@ -23,8 +23,6 @@ public class Ricerca_supermercati extends Fragment {
     String supermercato;
 
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,7 +70,6 @@ public class Ricerca_supermercati extends Fragment {
         cerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity m1= (MainActivity) getActivity();
                 supermercato=inserimentosup.getText().toString();
                 listener.onButtonSelcted(supermercato);
             }

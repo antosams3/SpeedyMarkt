@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,19 +23,14 @@ import java.util.List;
 
 public class Inserimento_attivita extends Fragment {
     String email;
-    EditText EtNome, EtIndirizzo, EtCivico, EtCap, EtTelefono;
+    String EtNome, EtIndirizzo, EtCivico, EtCap, EtTelefono;
     Spinner Sel_Categoria;
     String negozio;
+    Button buttatt;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.inserimento_attivita, container, false);
-
-        EtNome = (EditText) view.findViewById(R.id.etNome);
-        EtIndirizzo = (EditText) view.findViewById(R.id.etIndirizzo);
-        EtCivico = (EditText) view.findViewById(R.id.etCivico);
-        EtCap = (EditText) view.findViewById(R.id.etCap);
-        EtTelefono = (EditText) view.findViewById(R.id.etTelefono);
 
         //Gestione spinner
         List<String> spinnerArray = new ArrayList<String>();
@@ -47,6 +44,20 @@ public class Inserimento_attivita extends Fragment {
         Sel_Categoria = (Spinner) view.findViewById(R.id.spinner1);
         Sel_Categoria.setAdapter(adapter);
 
+        buttatt=(Button)view.findViewById(R.id.etButton);
+        buttatt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EtNome = ((EditText) view.findViewById(R.id.etNome)).getText().toString();
+                EtIndirizzo =( (EditText) view.findViewById(R.id.etIndirizzo)).getText().toString();
+                EtCivico = ((EditText) view.findViewById(R.id.etCivico)).getText().toString();
+                EtCap = ((EditText) view.findViewById(R.id.etCap)).getText().toString();
+                EtTelefono = ((EditText) view.findViewById(R.id.etTelefono)).getText().toString();
+                //System.out.println(EtNome+" "+EtIndirizzo+" "+MainActivity.email+" "+Sel_Categoria.getSelectedItem().toString());
+                Background b= new Background(getContext());
+                b.execute("insert_activity",EtNome,EtIndirizzo,EtCivico,EtCap,EtTelefono,MainActivity.email,Sel_Categoria.getSelectedItem().toString());
+            }
+        });
         return view;
     }
 

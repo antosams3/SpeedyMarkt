@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,8 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import static it.appaccademy.speedymarkt.Profilo.email;
 
 
 public class Background extends AsyncTask<String, Void, String> {
@@ -229,7 +226,6 @@ public class Background extends AsyncTask<String, Void, String> {
                     String prezzo = params[4];
                     String quantita = params[5];
                     String idattivita = params[6];
-                    user_name = params[7];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -346,16 +342,17 @@ public class Background extends AsyncTask<String, Void, String> {
 
         //Ritorno ad Accesso_admin dopo Inserimento_attivita con dato email
         if (result.equals("Attivita' inserita correttamente!")) {
-            Intent intent = new Intent(this.context, Accesso_admin.class);
+            Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
-            context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_prodotto con dato email
         if (result.equals("Prodotto inserito con successo")) {
-            Intent intent = new Intent(this.context, Accesso_admin.class);
+            Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", user_name);
-            context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         }
 
         //Accesso a Carta terminata una registrazione con passaggio del dato email
