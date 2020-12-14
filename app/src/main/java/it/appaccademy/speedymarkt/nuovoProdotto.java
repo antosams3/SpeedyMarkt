@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -13,26 +14,23 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class Inserimento_prodotti extends Fragment {
-
-
-    public static ListView elenco;
-    public static ArrayList<singleRow> vettore;
-
+public class nuovoProdotto extends Fragment {
+    String idnegozio;
+    Button butt;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ip_seleziona_supermercato, container, false);
+        View view = inflater.inflate(R.layout.inserimento_prodotti, container, false);
 
 
+        if (getArguments() != null) {
+            idnegozio = getArguments().getString("id");
+        }
 
-        vettore=new ArrayList<singleRow>();
-        elenco=(ListView)view.findViewById(R.id.listview_elencosupermercati);
+        butt=(Button)view.findViewById(R.id.buttonaggiungi);
 
+        System.out.println("negozio selezionato "+idnegozio);
 
-        Lavoratore process = new Lavoratore(getContext());
-        process.execute("elencosupermercati",MainActivity.email);
         return view;
     }
-
 }

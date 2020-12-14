@@ -264,7 +264,5 @@ public class Prodotti extends Fragment {
             return convertView;
         }
 
-
-
     }
 

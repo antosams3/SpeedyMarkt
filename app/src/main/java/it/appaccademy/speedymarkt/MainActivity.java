@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel, nome, via;
+    String negozio_sel, nome, via,id;
     public static int  carrello_count_number=0;
     public static TextView carrello_counter;
-
+    String cond;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +74,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             negozio_sel = extras.getString("negozio_sel");
             nome = extras.getString("nome");
             via = extras.getString("via");
+            cond= extras.getString("from");
+            id=extras.getString("id");
 
         }
 
-        if(negozio_sel!=null){
+        if(negozio_sel!=null&&cond.equals("FALSE")){
             Prodotti fragmenti = new Prodotti();
             Bundle args = new Bundle();
             args.putString("email", email);
@@ -90,6 +92,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.replace(R.id.container_fragment, fragmenti);
             fragmentTransaction.commit();
         }
+        if(negozio_sel!=null&&cond.equals("TRUE")){
+            nuovoProdotto fragmenti = new nuovoProdotto();
+            Bundle args = new Bundle();
+            args.putString("email", email);
+            args.putString("negozio_sel",negozio_sel);
+            args.putString("nome",nome);
+            args.putString("id",id);
+            fragmenti.setArguments(args);
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragmenti);
+            fragmentTransaction.commit();
+        }
+
 
     }
 
