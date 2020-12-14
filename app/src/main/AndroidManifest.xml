@@ -15,7 +15,6 @@
         <activity android:name=".Registrazione" />
         <activity android:name=".Carta" />
         <activity android:name=".Accesso_admin" />
-
             <activity android:name=".SchermataIniziale" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

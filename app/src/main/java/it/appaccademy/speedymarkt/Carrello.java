@@ -25,12 +25,13 @@ import static java.lang.Math.floor;
 public class Carrello extends Fragment {
     private onFragmentBtnSelected3 listener;
     TextView prezzo;
-    String email;
+    public static String email;
     ListView elencocarrello;
     TextView datisuperm;
-    String nome, via, civico, città;
+    public static String nome, via;
     UUID code;
     String idOrdine;
+    public static double prezzotot;
     public static  ArrayList<singleRowProdotto> carrello=new ArrayList<>();
     @Nullable
     @Override
@@ -53,7 +54,7 @@ public class Carrello extends Fragment {
         for(int i=0;i<carrello.size();i++){
             tot=tot+carrello.get(i).getQuantita();
         }
-        double prezzotot=0.0;
+        prezzotot=0.0;
         for(int i=0;i<carrello.size();i++){
             prezzotot = prezzotot + ((carrello.get(i).getQuantita()) * Double.parseDouble(carrello.get(i).getPrezzo()));
         }
@@ -65,7 +66,7 @@ public class Carrello extends Fragment {
         datisuperm = (TextView) view.findViewById(R.id.datisuperm);
         datisuperm.setText("Stai ordinando da: "+nome+", "+via);
         prezzo = (TextView) view.findViewById(R.id.price);
-        prezzo.setText(String.valueOf(Math.floor(prezzotot * 100)/100+"€"));
+        prezzo.setText((String.format("%.3g",prezzotot)+"€"));
 
         elencocarrello = (ListView) view.findViewById(R.id.listview_elencocarrello);
         elencocarrello.setAdapter(new customAdapterCarrello(getContext(), Carrello.carrello));
@@ -77,7 +78,7 @@ public class Carrello extends Fragment {
                 //Al click su "vai al pagamento" viene generato automaticamente l'id dell'ordine
                 code = UUID.randomUUID();
                 idOrdine = code.toString().substring(0,8);
-                listener.ongoPagamento(idOrdine, email, prezzoNonArr);
+                listener.ongoPagamento(idOrdine, email, prezzoNonArr, nome, via);
             }
         });
 
@@ -96,7 +97,7 @@ public class Carrello extends Fragment {
     }
 
     public interface onFragmentBtnSelected3{
-        public void ongoPagamento(String idOrdine, String email, String prezzoNonArr);
+        public void ongoPagamento(String idOrdine, String email, String prezzoNonArr, String nome, String via);
     }
 
     class customAdapterCarrello extends BaseAdapter {

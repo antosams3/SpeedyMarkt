@@ -59,11 +59,13 @@ public class Ricerca_supermercati extends Fragment {
         TextView textview40= (TextView) view.findViewById(R.id.textView40);
         TextView textview41= (TextView) view.findViewById(R.id.textView41);
         TextView textview38= (TextView) view.findViewById(R.id.textView38);
+        TextView textview39= (TextView) view.findViewById(R.id.textView39);
         textview22.startAnimation(slideinleft3);
         textview42.startAnimation(slideinleft3);
         textview40.startAnimation(slideinleft3);
         textview41.startAnimation(slideinleft3);
         textview38.startAnimation(slideinleft3);
+        textview39.startAnimation(slideinleft3);
 
         inserimentosup=((EditText)view.findViewById(R.id.cerca));
         cerca=view.findViewById(R.id.button2);

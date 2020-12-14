@@ -218,13 +218,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void ongoPagamento(String idOrdine, String email, String prezzoNonArr) {
+    public void ongoPagamento(String idOrdine, String email, String prezzoNonArr, String nome, String via) {
         System.out.println("DATI DA IN MAIN DA PASSARE AL BACKGROUNDWORKER MAIN: "+email+" "+prezzoNonArr);
         Pagamento fragmento = new Pagamento();
         Bundle args = new Bundle();
         args.putString("idOrdine", idOrdine);
         args.putString("email", email);
         args.putString("prezzoNonArr", prezzoNonArr);
+        args.putString("nome", nome);
+        args.putString("via", via);
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();

@@ -1,6 +1,8 @@
 package it.appaccademy.speedymarkt;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static it.appaccademy.speedymarkt.MainActivity.Show_Counter;
 import static it.appaccademy.speedymarkt.MainActivity.carrello_count_number;
 import static it.appaccademy.speedymarkt.MainActivity.carrello_counter;
@@ -58,7 +62,7 @@ public class Prodotti extends Fragment {
         }
 
         carr=(Button)view.findViewById(R.id.buttonpaga1);
-        carr.setVisibility(View.GONE);
+        carr.setVisibility(GONE);
         carr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +182,17 @@ public class Prodotti extends Fragment {
             nome.setText(tmp.Nome);
             marchio.setText(tmp.Marchio);
             prezzo.setText((String.valueOf(list.get(position).getPrezzo()))+"€");
+            if (list.get(position).quantitatot <= 5) {
+                nome.setTextColor(Color.parseColor("#D40000"));
+                marchio.setTextColor(Color.parseColor("#D40000"));
+                prezzo.setTextColor(Color.parseColor("#D40000"));
+                qt.setTextColor(Color.parseColor("#D40000"));
+            } else {
+                nome.setTextColor(Color.parseColor("#000000"));
+                marchio.setTextColor(Color.parseColor("#000000"));
+                prezzo.setTextColor(Color.parseColor("#000000"));
+                qt.setTextColor(Color.parseColor("#000000"));
+            }
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -211,9 +226,9 @@ public class Prodotti extends Fragment {
                     navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
                     Show_Counter(carrello_count_number);
 
-                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == View.GONE) {
-                        Prodotti.escl.setVisibility(View.VISIBLE);
-                        Prodotti.carr.setVisibility(View.VISIBLE);
+                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == GONE) {
+                        Prodotti.escl.setVisibility(VISIBLE);
+                        Prodotti.carr.setVisibility(VISIBLE);
                         Animation slideinleft1 = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_in_left);
                         Animation slideinright = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_in_right);
                         Prodotti.carr.startAnimation(slideinleft1);
@@ -235,12 +250,12 @@ public class Prodotti extends Fragment {
                         carrello_counter = (TextView)li.inflate(R.layout.counter_carrello,null);
                         navigationView.getMenu().findItem(R.id.carrello).setActionView(carrello_counter);
                         Show_Counter(carrello_count_number);
-                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == View.GONE) {
-                            Prodotti.escl.setVisibility(View.VISIBLE);
+                        if (carrello_count_number > 0 && Prodotti.escl.getVisibility() == GONE) {
+                            Prodotti.escl.setVisibility(VISIBLE);
                         }
                         if (carrello_count_number == 0){
-                            Prodotti.escl.setVisibility(View.GONE);
-                            Prodotti.carr.setVisibility(View.GONE);
+                            Prodotti.escl.setVisibility(GONE);
+                            Prodotti.carr.setVisibility(GONE);
                             Animation slideoutleft1 = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_out_left);
                             Animation slideoutright = AnimationUtils.loadAnimation(v.getContext(), R.anim.slide_out_right);
                             Prodotti.carr.startAnimation(slideoutleft1);
