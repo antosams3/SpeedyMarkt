@@ -65,7 +65,7 @@ public class Carrello extends Fragment {
         datisuperm = (TextView) view.findViewById(R.id.datisuperm);
         datisuperm.setText("Stai ordinando da: "+nome+", "+via);
         prezzo = (TextView) view.findViewById(R.id.price);
-        prezzo.setText(String.valueOf(Math.floor(prezzotot * 100)/100+"€"));
+        prezzo.setText((String.format("%.3g",prezzotot)+"€"));
 
         elencocarrello = (ListView) view.findViewById(R.id.listview_elencocarrello);
         elencocarrello.setAdapter(new customAdapterCarrello(getContext(), Carrello.carrello));
