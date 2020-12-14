@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.zxing.WriterException;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -29,6 +31,8 @@ public class Pagamento extends Fragment {
     String idOrdine;
     String email;
     String prezzoNonArr;
+    String nome;
+    String via;
     private Pagamento.onFragmentBtnSelected3 listener;
 
     @Nullable
@@ -46,6 +50,14 @@ public class Pagamento extends Fragment {
 
         if (getArguments() != null) {
             prezzoNonArr = getArguments().getString("prezzoNonArr");
+        }
+
+        if (getArguments() != null) {
+           nome = getArguments().getString("nome");
+        }
+
+        if (getArguments() != null) {
+            via = getArguments().getString("via");
         }
 
         ImageView qrImage = view.findViewById(R.id.qrPlaceHolder);
@@ -91,6 +103,8 @@ public class Pagamento extends Fragment {
         textviewc3.startAnimation(slideinleft3);
         textviewc4.startAnimation(slideinleft3);
 
+        TextView textviewprezzo = view.findViewById(R.id.price2);
+        textviewprezzo.setText((String.format("%.3g",Carrello.prezzotot)+"€"));
         Button buttonpaga1 = view.findViewById(R.id.buttonpaga1);
         buttonpaga1.setOnClickListener(new View.OnClickListener() {
             @Override
