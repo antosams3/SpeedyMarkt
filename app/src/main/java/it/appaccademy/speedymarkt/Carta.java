@@ -19,6 +19,8 @@ public class Carta extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayDate;
     String email;
+    String tipo;
+    String nome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,10 @@ public class Carta extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
+            tipo = extras.getString("tipo");
+            System.out.println("prelievo da reg "+tipo);
         }
+
 
 
         //Gestione calendario
@@ -72,7 +77,7 @@ public class Carta extends AppCompatActivity {
         String cvv = ((EditText) findViewById(R.id.cvv)).getText().toString();
         //Thread
         Background backgroundWorker = new Background(this);
-        backgroundWorker.execute("card", email, titolare, numero, scadenza, cvv);
+        backgroundWorker.execute("card", email, titolare, numero, scadenza, cvv, tipo);
 
 
     }
