@@ -43,6 +43,7 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     String emailutente;
     ArrayList<singleRow> elenco;
     ArrayList<singleRowOrdine> elencoordini;
+    String menu;
     boolean cond=false;
    
 
@@ -53,11 +54,14 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     
     @Override
     protected Void doInBackground(String... params) {
-        switch(params[0]){
+        menu=params[0];
+        switch(menu){
             case "elencosupermercati":
             try {
                 email=params[1];
-                cond=true;
+                if(params[2].equals("TRUE")){
+                    cond=true;
+                }
                 URL url = new URL("http://10.0.2.2/ip_elencosupermercati.php");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
@@ -158,7 +162,7 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
             case "elenco_ordini":
                 try {
                     idattivita=params[1];
-                    URL url = new URL("http://10.0.2.2/ordini.php");
+                    URL url = new URL("http://10.0.2.2/elenco_ordini.php");
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
@@ -182,13 +186,14 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                     }
                     if(!(data.equals("Nessun risultato"))) {
                         JSONArray JA = new JSONArray(data);
+
                         elencoordini = new ArrayList<>();
                         for (int i = 0; i < JA.length(); i++) {
                             JSONObject JO = (JSONObject) JA.get(i);
-                            idordine = (String) JO.get("nome");
-                            emailutente = (String) JO.get("via");
+                            idordine = (String) JO.get("idOrdine");
+                            emailutente = (String) JO.get("emailUtente");
                             ord = new singleRowOrdine(idordine, emailutente);
-                            elenco.add(ogg);
+                            elencoordini.add(ord);
                             //dataParsed = dataParsed + singleParsed;
                         }
                     }
@@ -210,26 +215,65 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        switch(menu){
+            case "elenco_ordini":
+                ElencoOrdini.vettoreordine.clear();
+            if(!data.equals("Nessun risultato")){
 
-        if (data.equals("Nessun risultato")) {
-            Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this.context, MainActivity.class);
-            context.startActivity(intent);
-
-        } else {
-            if(cond==true){
-                for (int i=0; i < elenco.size(); i++){
-                    Inserimento_prodotti.vettore.add(elenco.get(i));
+                for (int i=0; i < elencoordini.size(); i++){
+                    ElencoOrdini.vettoreordine.add(elencoordini.get(i));
                 }
-                Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore,"TRUE"));
+                ElencoOrdini.elencordini.setAdapter(new customAdapterOrdine(this.context,ElencoOrdini.vettoreordine));
             }else{
-                for (int i=0; i < elenco.size(); i++){
-                    vettore.add(elenco.get(i));
-                }
-                ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore,"FALSE"));
+                Toast.makeText(this.context, "Nessun ordine da visualizzare", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(this.context, MainActivity.class);
+                //context.startActivity(intent);
+                ElencoOrdini.elencordini.setAdapter(new customAdapterOrdine(this.context,ElencoOrdini.vettoreordine));
             }
+            break;
+
+            case "elencoattivita":
+                if (data.equals("Nessun risultato")) {
+                    Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this.context, MainActivity.class);
+                    context.startActivity(intent);
+                } else {
+
+                    for (int i = 0; i < elenco.size(); i++) {
+                        Inserimento_prodotti.vettore.add(elenco.get(i));
+
+                        Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore, "TRUE"));
+                    }
+                }
+
+                break;
+            case "elencosupermercati":
+                if (data.equals("Nessun risultato")) {
+                    Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this.context, MainActivity.class);
+                    context.startActivity(intent);
+                } else {
+
+                        if(cond==true){
+                            for (int i=0; i < elenco.size(); i++){
+                                ElencoOrdini.elencoatt.add(elenco.get(i));
+                                ElencoOrdini.spinnerArray.add(elenco.get(i).getNome());
+                            }
+
+
+                        }else{
+                            for (int i=0; i < elenco.size(); i++){
+                                vettore.add(elenco.get(i));
+                            }
+                            ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore,"FALSE"));
+                        }
+
+                    }
+
+                break;
 
         }
+
 
     }
 }

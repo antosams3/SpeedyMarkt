@@ -3,7 +3,6 @@ package it.appaccademy.speedymarkt;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -23,8 +22,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import static it.appaccademy.speedymarkt.ElencoSupermercati.vettore;
-
 
 public class WorkerProdotto extends AsyncTask<String, Void, Void> {
     Context context;
@@ -36,6 +33,7 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
     String quantita;
     String ean ="";
     singleRowProdotto ogg;
+    String menu="";
     ArrayList<singleRowProdotto> elenco;
 
 
@@ -47,9 +45,17 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... params) {
+
         try {
-            negozio=params[0];
-            URL url = new URL("http://10.0.2.2/prodotti.php");
+            menu=negozio=params[0];
+            URL url;
+            if(negozio.equals("Ordine")){
+                 url = new URL("http://10.0.2.2/ordine_singolo.php");
+                 negozio=params[1];
+            }else{
+                 url = new URL("http://10.0.2.2/prodotti.php");
+            }
+            // in questo caso negozio vale o negozio oppure irordine in base alla query che deve fare, il risulato sarà sempre un arraylist di prodtti
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -109,11 +115,17 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
             context.startActivity(intent);
 
         } else {
-            for (int i=0; i < elenco.size(); i++){
-                Prodotti.vettore.add(elenco.get(i));
-                System.out.println(Prodotti.vettore.get(i).toString());
+            if(menu.equals("Ordine")){
+                OrdineSelezionato.vettoreordine.addAll(elenco);
+                OrdineSelezionato.listviewordine.setAdapter(new customAdapterCarrello(this.context, OrdineSelezionato.vettoreordine));
+            }else{
+                for (int i=0; i < elenco.size(); i++){
+                    Prodotti.vettore.add(elenco.get(i));
+
+                }
+                Prodotti.elenco.setAdapter(new customAdapterProdotto(this.context, Prodotti.vettore));
             }
-            Prodotti.elenco.setAdapter(new customAdapterProdotto(this.context, Prodotti.vettore));
+
         }
 
     }

@@ -1,10 +1,12 @@
 package it.appaccademy.speedymarkt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -19,12 +21,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ElencoOrdini extends Fragment {
     public static ArrayList<singleRowOrdine> vettoreordine;
-    ListView elencordini;
+    public static ListView elencordini;
+    public static ArrayList<String> spinnerArray=new ArrayList<>();
+    public static ArrayList<singleRow> elencoatt=new ArrayList<>();
+    public static String selected;
     Spinner Sel_Attivita;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,20 +38,43 @@ public class ElencoOrdini extends Fragment {
         elencordini=(ListView)view.findViewById(R.id.listview_elencordini);
 
         //Gestione spinner
-        List<String> spinnerArray = new ArrayList<String>();
-        spinnerArray.add("Supermercato");
-        spinnerArray.add("Elettronica");
-        spinnerArray.add("Alimentari");
-        spinnerArray.add("Altro");
+
+        spinnerArray.add("Tutte le attività"); // vedere come gestire
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getContext(), android.R.layout.simple_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Sel_Attivita = (Spinner) view.findViewById(R.id.spinner1);
+        Sel_Attivita = (Spinner) view.findViewById(R.id.spinnerattivita);
         Sel_Attivita.setAdapter(adapter);
 
 
-        Lavoratore process = new Lavoratore(getContext());
-        process.execute();
+
+
+        Sel_Attivita.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selected=Sel_Attivita.getSelectedItem().toString();
+                for(int i=0;i<elencoatt.size();i++){
+                    if(elencoatt.get(i).getNome().equals(selected)){
+                        selected=elencoatt.get(i).getId();
+                    }
+                }
+                vettoreordine.clear();
+                if(!selected.equals("Tutte le attività")){
+                    Lavoratore process = new Lavoratore(getContext());
+                    process.execute("elenco_ordini",selected);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                System.out.println("niente ");
+            }
+
+        });
+
+        Lavoratore riempispinner= new Lavoratore(getContext());
+        riempispinner.execute("elencosupermercati",MainActivity.email,"TRUE");
         return view;
     }
 }
@@ -102,19 +130,20 @@ class customAdapterOrdine extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater= LayoutInflater.from(c);
         if(convertView==null){
-            convertView=layoutInflater.inflate(R.layout.singlerow,parent,false);
+            convertView=layoutInflater.inflate(R.layout.singlerow_ordine,parent,false);
         }
-
-        TextView id=(TextView)convertView.findViewById(R.id.sro_idordine);
-        TextView email=(TextView)convertView.findViewById(R.id.sro_utente);
+        TextView id=convertView.findViewById(R.id.sro_idordine);
+        TextView email=convertView.findViewById(R.id.sro_utente);
         singleRowOrdine tmp=list.get(position);
         id.setText(tmp.idordine);
         email.setText(tmp.emailutente);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Hai selezionato ordine : "+list.get(position).getIdOrdine(),Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(v.getContext(),"Hai selezionato ordine : "+position,Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(c,MainActivity.class);
+                i.putExtra("id_ordine",list.get(position).getIdOrdine());
+                c.startActivity(i);
 
 
             }

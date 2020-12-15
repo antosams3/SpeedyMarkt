@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel, nome, via,id,esitoInsert;
+    String negozio_sel, nome, via,id,esitoInsert,id_ordine;
     public static int  carrello_count_number=0;
     public static TextView carrello_counter;
     String cond;
@@ -70,9 +70,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             via = extras.getString("via");
             cond= extras.getString("from");
             id=extras.getString("id");
-
+            id_ordine=extras.getString("id_ordine");
         }
 
+        if(id_ordine!=null){
+            OrdineSelezionato fragmenti = new OrdineSelezionato();
+            Bundle args = new Bundle();
+            args.putString("id_ordine", id_ordine);
+            fragmenti.setArguments(args);
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment, fragmenti);
+            fragmentTransaction.commit();
+        }
 
 
         if(negozio_sel!=null&&cond.equals("FALSE")){
@@ -170,7 +180,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }
         if(item.getItemId() == R.id.visualizza_ordini){
-            visualizza_ordini fragment = new visualizza_ordini();
+
+            ElencoOrdini.spinnerArray.clear();
+            ElencoOrdini fragment = new ElencoOrdini();
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment, fragment);

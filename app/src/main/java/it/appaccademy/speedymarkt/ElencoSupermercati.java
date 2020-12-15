@@ -72,6 +72,9 @@ class singleRow {
     public String getId() {
         return Id;
     }
+    public String getCap() {
+        return Cap;
+    }
     public String getNome(){
         return Nome;
     }
