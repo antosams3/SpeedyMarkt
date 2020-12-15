@@ -21,6 +21,7 @@ public class Registrazione extends AppCompatActivity {
     private static final String TAG = "Registrazione";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mDisplayDate;
+    String tipo = "acquirente";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class Registrazione extends AppCompatActivity {
                 if (isChecked) {
                     findViewById(R.id.register_piva).setClickable(true);
                     findViewById(R.id.register_piva).setEnabled(true);
+                    tipo = "venditore";
                 } else {
                     findViewById(R.id.register_piva).setClickable(false);
                     findViewById(R.id.register_piva).setEnabled(false);
@@ -106,7 +108,7 @@ public class Registrazione extends AppCompatActivity {
 
 
                 Background backgroundWorker = new Background(this);
-                backgroundWorker.execute("insert", newnome, newcognome, newdata, newemail, newpassword, newpiva);
+                backgroundWorker.execute("insert", newnome, newcognome, newdata, newemail, newpassword, newpiva, tipo);
 
             }
         }

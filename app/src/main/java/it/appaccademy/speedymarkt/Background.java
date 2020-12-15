@@ -18,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import static it.appaccademy.speedymarkt.MainActivity.email;
+
 
 public class Background extends AsyncTask<String, Void, String> {
     Context context;
@@ -27,6 +29,10 @@ public class Background extends AsyncTask<String, Void, String> {
     String email_card;
     AlertDialog alertDialog;
     String data = "";
+    String tipo;
+    String nome;
+    String nomecard, tipocard;
+
 
 
     Background(Context ctx) {
@@ -88,12 +94,13 @@ public class Background extends AsyncTask<String, Void, String> {
             case "insert":
                 login_url = "http://10.0.2.2/register.php";
                 try {
-                    String nome = params[1];
+                    nome = params[1];
                     String cognome = params[2];
                     String data = params[3];
                     email_reg = params[4];
                     String password = params[5];
                     String piva = params[6];
+                    tipo = params[7];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -101,7 +108,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email_reg, "UTF-8") + "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(cognome, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" + URLEncoder.encode("dataNasc", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8") + "&" + URLEncoder.encode("piva", "UTF-8") + "=" + URLEncoder.encode(piva, "UTF-8");
+                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email_reg, "UTF-8") + "&" + URLEncoder.encode("nome", "UTF-8") + "=" + URLEncoder.encode(nome, "UTF-8") + "&" + URLEncoder.encode("cognome", "UTF-8") + "=" + URLEncoder.encode(cognome, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") + "&" + URLEncoder.encode("dataNasc", "UTF-8") + "=" + URLEncoder.encode(data, "UTF-8") + "&" + URLEncoder.encode("piva", "UTF-8") + "=" + URLEncoder.encode(piva, "UTF-8")+ "&" + URLEncoder.encode("tipo", "UTF-8") + "=" + URLEncoder.encode(tipo, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
@@ -139,6 +146,7 @@ public class Background extends AsyncTask<String, Void, String> {
                     String numero = params[3];
                     String scadenza = params[4];
                     String cvv = params[5];
+                    tipocard = params[6];
                     URL url = new URL(login_url);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
@@ -359,6 +367,8 @@ public class Background extends AsyncTask<String, Void, String> {
         if (result.equals("Utente creato con successo")) {
             Intent intent = new Intent(this.context, Carta.class);
             intent.putExtra("email", email_reg);
+            intent.putExtra("tipo", tipo);
+            System.out.println("da reg a card "+tipo);
             context.startActivity(intent);
             ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
@@ -367,6 +377,8 @@ public class Background extends AsyncTask<String, Void, String> {
         if (result.equals("Carta creata con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
             intent.putExtra("email", email_card);
+            intent.putExtra("tipo", tipocard);
+            System.out.println("da card a main "+tipocard);
             context.startActivity(intent);
 
         }

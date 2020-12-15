@@ -26,6 +26,9 @@ public class Profilo extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profilo, container, false);
 
+        //Creo istanza application:
+        SpeedyMarkt speedyMarkt = (SpeedyMarkt) getActivity().getApplicationContext();
+
         TvAnagNome = view.findViewById(R.id.tvAnagNome);
         TvAnagCognome = view.findViewById(R.id.tvAnagCognome);
         TvAnagDatanasc = view.findViewById(R.id.tvAnagDatanasc);
@@ -34,9 +37,10 @@ public class Profilo extends Fragment {
         TvAnagCarta =  view.findViewById(R.id.tvAnagCarta);
         TvAnagScadenza =  view.findViewById(R.id.tvAnagScadenza);
 
+
         //Thread
         BackgroundJSON process = new BackgroundJSON();
-        process.execute(MainActivity.email);
+        process.execute(speedyMarkt.getEmail());
         return view;
     }
 }

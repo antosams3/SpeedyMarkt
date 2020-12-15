@@ -38,7 +38,7 @@
                 android:title="Inserisci Prodotto" />
             <item
                 android:id="@+id/visualizza_ordini"
-                android:icon="@drawable/ic_baseline_add_business_24"
+                android:icon="@drawable/ic_baseline_article_24"
                 android:title="Visualizza Ordini" />
         </menu>
     </item>
