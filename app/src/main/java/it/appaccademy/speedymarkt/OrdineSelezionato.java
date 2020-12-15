@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,8 +27,9 @@ public class OrdineSelezionato extends Fragment {
             id_ordine = getArguments().getString("id_ordine");
         }
         listviewordine = (ListView) view.findViewById(R.id.listview_elencocarrello);
-        b=(Button)view.findViewById(R.id.buttonpagamento);
-        b.setVisibility(view.GONE);
+        ((Button)view.findViewById(R.id.buttonpagamento)).setVisibility(view.GONE);
+        ((TextView) view.findViewById(R.id.price)).setVisibility(view.GONE);
+
         WorkerProdotto proc=new WorkerProdotto(getContext());
         proc.execute("Ordine",id_ordine);
         return view;

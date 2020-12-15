@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +30,9 @@ public class Inserimento_prodotti extends Fragment {
 
 
         Lavoratore process = new Lavoratore(getContext());
-        process.execute("elencosupermercati",MainActivity.email);
+        System.out.println(MainActivity.email);
+        process.execute("elencosupermercati",MainActivity.email,"FALSE");
+        // inserisci FALSE causa riciclo di visualizza ordini che passa TRUE
         return view;
     }
 

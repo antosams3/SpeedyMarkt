@@ -48,8 +48,6 @@ public class ElencoOrdini extends Fragment {
         Sel_Attivita.setAdapter(adapter);
 
 
-
-
         Sel_Attivita.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {

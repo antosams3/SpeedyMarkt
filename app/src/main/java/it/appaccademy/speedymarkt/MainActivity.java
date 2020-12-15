@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String negozio;
     public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel, nome, via,id,esitoInsert,id_ordine;
+    String negozio_sel, nome, via,id,esitoInsert,tipo,id_ordine;
     public static int  carrello_count_number=0;
     public static TextView carrello_counter;
     String cond;
@@ -40,6 +40,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // prelievo dati
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            email = extras.getString("email");
+            tipo = extras.getString("tipo");
+            negozio_sel = extras.getString("negozio_sel");
+            nome = extras.getString("nome");
+            via = extras.getString("via");
+            cond= extras.getString("from");
+            id=extras.getString("id");
+            id_ordine=extras.getString("id_ordine");
+        }
+
+        // passaggio della variabile globale email e tipo
+        SpeedyMarkt speedyMarkt=(SpeedyMarkt) getApplicationContext();
+        speedyMarkt.setEmail(email);
+        speedyMarkt.setTipo(tipo);
+        //
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
@@ -60,18 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        //Prelievo del dato email
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            email = extras.getString("email");
-            negozio_sel = extras.getString("negozio_sel");
-            nome = extras.getString("nome");
-            via = extras.getString("via");
-            cond= extras.getString("from");
-            id=extras.getString("id");
-            id_ordine=extras.getString("id_ordine");
-        }
 
         if(id_ordine!=null){
             OrdineSelezionato fragmenti = new OrdineSelezionato();

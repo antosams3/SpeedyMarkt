@@ -22,8 +22,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import static it.appaccademy.speedymarkt.ElencoSupermercati.vettore;
-
 
 public class Lavoratore extends AsyncTask<String, Void, Void> {
     Context context;
@@ -147,6 +145,7 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                         città = (String) JO.get("città");
                         ogg = new singleRow(nome, via, civico, id, cap, città);
                         elenco.add(ogg);
+                        System.out.println(ogg.toString());
                         //dataParsed = dataParsed + singleParsed;
                     }
                 }
@@ -232,18 +231,17 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
             }
             break;
 
-            case "elencoattivita":
+            case "elenco_attivita":
                 if (data.equals("Nessun risultato")) {
                     Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this.context, MainActivity.class);
                     context.startActivity(intent);
                 } else {
 
-                    for (int i = 0; i < elenco.size(); i++) {
-                        Inserimento_prodotti.vettore.add(elenco.get(i));
 
-                        Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore, "TRUE"));
-                    }
+                    ElencoSupermercati.vettore.addAll(elenco);
+                    ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, ElencoSupermercati.vettore,"FALSE"));
+
                 }
 
                 break;
@@ -259,13 +257,9 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                                 ElencoOrdini.elencoatt.add(elenco.get(i));
                                 ElencoOrdini.spinnerArray.add(elenco.get(i).getNome());
                             }
-
-
                         }else{
-                            for (int i=0; i < elenco.size(); i++){
-                                vettore.add(elenco.get(i));
-                            }
-                            ElencoSupermercati.elenco.setAdapter(new customAdapter(this.context, vettore,"FALSE"));
+                            Inserimento_prodotti.vettore.addAll(elenco);
+                            Inserimento_prodotti.elenco.setAdapter(new customAdapter(this.context, Inserimento_prodotti.vettore, "TRUE"));
                         }
 
                     }
