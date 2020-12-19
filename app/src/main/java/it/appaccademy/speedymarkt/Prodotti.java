@@ -186,7 +186,8 @@ public class Prodotti extends Fragment {
                 marchio.setTextColor(Color.parseColor("#D40000"));
                 prezzo.setTextColor(Color.parseColor("#D40000"));
                 qt.setTextColor(Color.parseColor("#D40000"));
-            } else {
+            }
+            if (list.get(position).quantitatot > 5) {
                 nome.setTextColor(Color.parseColor("#000000"));
                 marchio.setTextColor(Color.parseColor("#000000"));
                 prezzo.setTextColor(Color.parseColor("#000000"));
