@@ -116,7 +116,7 @@ public class Prodotti extends Fragment {
             return Nome;
         }
         public int getQuantita(){
-            return quantita;
+            return quantitatot;
         }
         public String getMarchio(){
             return Marchio;

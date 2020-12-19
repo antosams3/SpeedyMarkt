@@ -147,6 +147,7 @@ class customAdapterOrdine extends BaseAdapter {
                 Toast.makeText(v.getContext(),"Hai selezionato ordine : "+position,Toast.LENGTH_SHORT).show();
                 Intent i=new Intent(c,MainActivity.class);
                 i.putExtra("id_ordine",list.get(position).getIdOrdine());
+                i.putExtra("email",MainActivity.email);
                 c.startActivity(i);
 
 

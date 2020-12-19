@@ -116,12 +116,12 @@ public class WorkerProdotto extends AsyncTask<String, Void, Void> {
 
         } else {
             if(menu.equals("Ordine")){
+                OrdineSelezionato.vettoreordine.clear();
                 OrdineSelezionato.vettoreordine.addAll(elenco);
                 OrdineSelezionato.listviewordine.setAdapter(new customAdapterCarrello(this.context, OrdineSelezionato.vettoreordine));
             }else{
                 for (int i=0; i < elenco.size(); i++){
                     Prodotti.vettore.add(elenco.get(i));
-
                 }
                 Prodotti.elenco.setAdapter(new customAdapterProdotto(this.context, Prodotti.vettore));
             }

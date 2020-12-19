@@ -140,8 +140,8 @@ class customAdapterCarrello extends BaseAdapter {
         TextView marchio = (TextView) convertView.findViewById(R.id.marchio);
         TextView qt = (TextView) convertView.findViewById(R.id.quantita);
         TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
-        qt.setText(String.valueOf(list.get(position).getQuantita()));
         singleRowProdotto tmp=list.get(position);
+        qt.setText(String.valueOf(tmp.getQuantita()));
         nome.setText(tmp.Nome);
         marchio.setText(tmp.Marchio);
         prezzo.setText((String.valueOf(list.get(position).getPrezzo()))+"€");
