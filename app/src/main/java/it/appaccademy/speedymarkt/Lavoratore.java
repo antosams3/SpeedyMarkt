@@ -43,6 +43,8 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
     ArrayList<singleRowOrdine> elencoordini;
     String menu;
     boolean cond=false;
+    String data2;
+    String ora2;
    
 
 
@@ -191,7 +193,9 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                             JSONObject JO = (JSONObject) JA.get(i);
                             idordine = (String) JO.get("idOrdine");
                             emailutente = (String) JO.get("emailUtente");
-                            ord = new singleRowOrdine(idordine, emailutente);
+                            data2 = (String) JO.get("data");
+                            ora2 = (String) JO.get("ora");
+                            ord = new singleRowOrdine(idordine, emailutente, data2, ora2);
                             elencoordini.add(ord);
                             //dataParsed = dataParsed + singleParsed;
                         }

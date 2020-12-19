@@ -79,10 +79,14 @@ public class ElencoOrdini extends Fragment {
  class singleRowOrdine{
     String idordine;
     String emailutente;
+    String data2;
+    String ora2;
 
-    public singleRowOrdine(String r,String s){
-        idordine=r;
-        emailutente=s;
+    public singleRowOrdine(String idordine, String emailutente, String data2, String ora2){
+        this.idordine = idordine;
+        this.emailutente =emailutente;
+        this.data2 =data2;
+        this.ora2 =ora2;
     }
     public String getIdOrdine(){
         return idordine;
@@ -90,6 +94,8 @@ public class ElencoOrdini extends Fragment {
     public String getemail(){
         return emailutente;
     }
+    public String getData2(){return data2;}
+    public String getOra2(){return ora2;}
 
 }
 class customAdapterOrdine extends BaseAdapter {
@@ -133,8 +139,8 @@ class customAdapterOrdine extends BaseAdapter {
         TextView id=convertView.findViewById(R.id.sro_idordine);
         TextView email=convertView.findViewById(R.id.sro_utente);
         singleRowOrdine tmp=list.get(position);
-        id.setText(tmp.idordine);
-        email.setText(tmp.emailutente);
+        id.setText("ID: "+tmp.idordine);
+        email.setText("UTENTE: "+tmp.emailutente+"       DATA: "+tmp.data2+" ORA: "+tmp.ora2);
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
