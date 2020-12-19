@@ -250,6 +250,7 @@ public class Lavoratore extends AsyncTask<String, Void, Void> {
                     Toast.makeText(this.context, data, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this.context, MainActivity.class);
                     context.startActivity(intent);
+                    System.out.println("test");
                 } else {
 
                         if(cond==true){
