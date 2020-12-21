@@ -116,7 +116,7 @@ public class Prodotti extends Fragment {
             return Nome;
         }
         public int getQuantita(){
-            return quantitatot;
+            return quantita;
         }
         public String getMarchio(){
             return Marchio;
@@ -178,8 +178,8 @@ public class Prodotti extends Fragment {
             TextView prezzo = (TextView) convertView.findViewById(R.id.prezzo);
             qt.setText(String.valueOf(list.get(position).getQuantita()));
             singleRowProdotto tmp=list.get(position);
-            nome.setText(tmp.Nome);
-            marchio.setText(tmp.Marchio);
+            nome.setText(tmp.Marchio);
+            marchio.setText(tmp.Nome);
             prezzo.setText((String.valueOf(list.get(position).getPrezzo()))+"€");
             if (list.get(position).quantitatot <= 5) {
                 nome.setTextColor(Color.parseColor("#D40000"));

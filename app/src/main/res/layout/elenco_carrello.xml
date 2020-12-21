@@ -55,4 +55,16 @@
         android:textColor="#FFFFFF"
         android:text="Ordina presso: Re del pane, lungomare dalmazia 64, Mola di Bari" />
 
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="10dp"
+        android:text="Carrello"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
 </RelativeLayout>

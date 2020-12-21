@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class Pagamento extends Fragment {
     String nome;
     String via;
     private Pagamento.onFragmentBtnSelected3 listener;
+    private Pagamento.onFragmenBtnSelected4 listener2;
+
 
     @Nullable
     @Override
@@ -106,10 +109,17 @@ public class Pagamento extends Fragment {
         TextView textviewprezzo = view.findViewById(R.id.price2);
         textviewprezzo.setText((String.format("%.3g",Carrello.prezzotot)+"€"));
         Button buttonpaga1 = view.findViewById(R.id.buttonpaga1);
+        ImageButton buttoncall = view.findViewById(R.id.buttoncall);
         buttonpaga1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.ongoAlert();
+            }
+        });
+        buttoncall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener2.ongoCall();
             }
         });
 
@@ -120,12 +130,22 @@ return view;    }
         super.onAttach(context);
         if(context instanceof Pagamento.onFragmentBtnSelected3) {
             listener = (Pagamento.onFragmentBtnSelected3) context;
-        } else {
+        }
+
+        if (context instanceof Pagamento.onFragmenBtnSelected4){
+            listener2 = (Pagamento.onFragmenBtnSelected4) context;
+        }
+
+        else {
             throw new ClassCastException(context.toString() +"ciao");
         }
     }
 
     public interface onFragmentBtnSelected3{
         public void ongoAlert();
+    }
+
+    public interface onFragmenBtnSelected4{
+        public void ongoCall();
     }
 }

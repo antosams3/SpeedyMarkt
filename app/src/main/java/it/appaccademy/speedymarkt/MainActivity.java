@@ -2,6 +2,7 @@ package it.appaccademy.speedymarkt;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2, Carrello.onFragmentBtnSelected3, Pagamento.onFragmentBtnSelected3{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2, Carrello.onFragmentBtnSelected3, Pagamento.onFragmentBtnSelected3, Pagamento.onFragmenBtnSelected4{
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -54,11 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             id_ordine=extras.getString("id_ordine");
         }
 
-        // passaggio della variabile globale email e tipo
-        SpeedyMarkt speedyMarkt=(SpeedyMarkt) getApplicationContext();
-        speedyMarkt.setEmail(email);
-        speedyMarkt.setTipo(tipo);
-        //
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -260,5 +256,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.setTitle("SpeedyMarkt:");
         alertDialog.setMessage("Grazie per aver testato la beta di SpeedyMarkt!\n\nPresto nuovi aggiornamenti.");
         alertDialog.show();
+    }
+
+    @Override
+    public void ongoCall(){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:0804742983"));
+        startActivity(intent);
     }
 }
