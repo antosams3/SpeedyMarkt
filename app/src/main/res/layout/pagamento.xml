@@ -130,7 +130,7 @@
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="@+id/textViewc1"
         app:layout_constraintTop_toTopOf="@+id/textViewc1"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.852" />
 
     <TextView
         android:id="@+id/textViewc3"
@@ -140,10 +140,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/textViewc1"
         app:layout_constraintEnd_toEndOf="@+id/textViewc1"
-        app:layout_constraintHorizontal_bias="0.576"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="@+id/textViewc1"
         app:layout_constraintTop_toTopOf="@+id/textViewc1"
-        app:layout_constraintVertical_bias="0.524" />
+        app:layout_constraintVertical_bias="0.54" />
 
     <TextView
         android:id="@+id/textViewa3"
@@ -193,9 +193,10 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textViewc1"
         app:layout_constraintEnd_toEndOf="@+id/textViewb1"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="@+id/textViewb1"
         app:layout_constraintTop_toBottomOf="@+id/textViewa1"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.523" />
 
     <TextView
         android:id="@+id/textViewb2"
@@ -242,14 +243,6 @@
         app:layout_constraintStart_toStartOf="@+id/textViewb1"
         app:layout_constraintTop_toBottomOf="@+id/textViewa1"
         app:layout_constraintVertical_bias="0.815" />
-
-    <TextView
-        android:id="@+id/textView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="214dp" />
 
     <TextView
         android:id="@+id/textView6"

@@ -26,7 +26,10 @@
         </menu>
     </item>
 
-    <item android:title="Amministrazione">
+    <item
+        android:id="@+id/adminpanel"
+        android:title="Amministrazione"
+        android:visible="false">
         <menu>
             <item
                 android:id="@+id/inserisci_attivita"

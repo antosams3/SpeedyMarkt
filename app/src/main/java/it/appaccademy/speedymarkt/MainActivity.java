@@ -1,10 +1,13 @@
 package it.appaccademy.speedymarkt;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +20,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
+import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2, Carrello.onFragmentBtnSelected3, Pagamento.onFragmentBtnSelected3, Pagamento.onFragmenBtnSelected4{
     DrawerLayout drawerLayout;
@@ -67,12 +73,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        if (tipo.equals("venditore")) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.adminpanel).setVisible(true);
+        }
+
 
         //carica il fragment di default
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.container_fragment, new Ricerca_supermercati());
         fragmentTransaction.commit();
+
 
 
 
