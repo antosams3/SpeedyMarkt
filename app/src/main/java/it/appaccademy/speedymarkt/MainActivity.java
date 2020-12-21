@@ -1,13 +1,11 @@
 package it.appaccademy.speedymarkt;
 
 import android.app.AlertDialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-
-import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Ricerca_supermercati.onFragmentBtnSelected,Prodotti.onFragmentBtnSelected2, Carrello.onFragmentBtnSelected3, Pagamento.onFragmentBtnSelected3, Pagamento.onFragmenBtnSelected4{
     DrawerLayout drawerLayout;
@@ -34,11 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static NavigationView navigationView;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    String negozio;
-    public static ArrayList<singleRow> lista;
     public static String email;
-    String negozio_sel, nome, via,id,esitoInsert,tipo,id_ordine;
+    String negozio_sel, nome, via,id,id_ordine;
     public static int  carrello_count_number=0;
+    public static String tipo;
     public static TextView carrello_counter;
     String cond;
 
@@ -47,12 +39,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.out.println(tipo);
         // prelievo dati
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             email = extras.getString("email");
-            tipo = extras.getString("tipo");
+            //tipo = extras.getString("tipo");
             negozio_sel = extras.getString("negozio_sel");
             nome = extras.getString("nome");
             via = extras.getString("via");

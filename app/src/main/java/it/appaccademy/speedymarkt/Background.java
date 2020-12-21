@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,8 +21,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import static it.appaccademy.speedymarkt.MainActivity.email;
 
 
 public class Background extends AsyncTask<String, Void, String> {
@@ -184,37 +186,43 @@ public class Background extends AsyncTask<String, Void, String> {
              ****************************
              */
             case "tipo":
-                login_url = "http://10.0.2.2/login.php";
+
                 try {
-                    String user_name = params[1];
-                    String password = params[2];
-                    URL url = new URL(login_url);
+                    user_name = params[1];
+                    String password =params[2];
+                    URL url = new URL("http://10.0.2.2/login.php");
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     httpURLConnection.setRequestMethod("POST");
                     httpURLConnection.setDoOutput(true);
                     httpURLConnection.setDoInput(true);
                     OutputStream outputStream = httpURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8") + "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+                    String post_data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(user_name, "UTF-8")+"&"+URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
                     bufferedWriter.write(post_data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
                     outputStream.close();
                     InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
-                    String result = "";
+                    inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                     String line = "";
-                    while ((line = bufferedReader.readLine()) != null) {
-                        result += line;
+                    while (line != null) {
+                        line = bufferedReader.readLine();
+                        data = data + line;
                     }
-                    bufferedReader.close();
-                    inputStream.close();
-                    httpURLConnection.disconnect();
+                    String result="";
+                    JSONArray JA = new JSONArray(data);
+                    for (int i = 0; i < JA.length(); i++) {
+                        JSONObject JO = (JSONObject) JA.get(i);
+                        result = (String) JO.get("tipo") ;
 
+                    }
                     return result;
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -342,23 +350,23 @@ public class Background extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
 
         //Accesso a RicercaSupermercati da SchermataIniziale con dato email
-        if (result.equals("Accesso eseguito")) {
+        if (result.equals("venditore")||result.equals("acquirente")) {
+            MainActivity.tipo=result;
             Intent intent = new Intent(this.context, MainActivity.class);
-            intent.putExtra("email", user_name);
+            MainActivity.email=user_name;
             context.startActivity(intent);
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_attivita con dato email
         if (result.equals("Completato")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-            intent.putExtra("email", user_name);
+            MainActivity.email=user_name;
             context.startActivity(intent);
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_prodotto con dato email
         if (result.equals("Prodotto inserito con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-            intent.putExtra("email", user_name);
             context.startActivity(intent);
 
         }
@@ -366,7 +374,7 @@ public class Background extends AsyncTask<String, Void, String> {
         //Accesso a Carta terminata una registrazione con passaggio del dato email
         if (result.equals("Utente creato con successo")) {
             Intent intent = new Intent(this.context, Carta.class);
-            intent.putExtra("email", email_reg);
+
             intent.putExtra("tipo", tipo);
             System.out.println("da reg a card "+tipo);
             context.startActivity(intent);
@@ -376,7 +384,7 @@ public class Background extends AsyncTask<String, Void, String> {
         //Accesso a SchermataIniziale terminata una registrazione carta con passaggio del dato email
         if (result.equals("Carta creata con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-            intent.putExtra("email", email_card);
+
             intent.putExtra("tipo", tipocard);
             System.out.println("da card a main "+tipocard);
             context.startActivity(intent);

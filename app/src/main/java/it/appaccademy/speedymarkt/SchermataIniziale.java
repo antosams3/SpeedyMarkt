@@ -1,16 +1,11 @@
 package it.appaccademy.speedymarkt;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SchermataIniziale extends AppCompatActivity {
@@ -32,7 +27,7 @@ public class SchermataIniziale extends AppCompatActivity {
 
         //Thread
         Background backgroundWorker = new Background(this);
-        backgroundWorker.execute("login", email, password);
+        backgroundWorker.execute("tipo", email, password);
         //aggiungere controllo sul tipo di accesso effettuato
     }
 
