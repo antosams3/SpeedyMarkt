@@ -18,7 +18,7 @@ public class Profilo extends Fragment {
     public static TextView TvAnagCarta;
     public static TextView TvAnagScadenza;
     public static TextView TvAnagTitolare;
-    static String email;
+
 
 
     @Nullable

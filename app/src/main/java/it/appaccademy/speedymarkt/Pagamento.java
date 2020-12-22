@@ -11,26 +11,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.zxing.WriterException;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.UUID;
-
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
 public class Pagamento extends Fragment {
     String idOrdine;
-    String email;
+
     String prezzoNonArr;
     String nome;
     String via;
@@ -47,9 +39,6 @@ public class Pagamento extends Fragment {
             idOrdine = getArguments().getString("idOrdine");
         }
 
-        if (getArguments() != null) {
-            email = getArguments().getString("email");
-        }
 
         if (getArguments() != null) {
             prezzoNonArr = getArguments().getString("prezzoNonArr");
@@ -70,7 +59,7 @@ public class Pagamento extends Fragment {
         qrImage.setImageBitmap(qrBits);
 
         WorkerCarrello process = new WorkerCarrello(getContext());
-        process.execute(idOrdine, email, prezzoNonArr);
+        process.execute(idOrdine, MainActivity.email, prezzoNonArr);
 
         //Gestione tamarrate
         Animation slideinleft1 = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_in_left);

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -346,21 +347,28 @@ public class Background extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         alertDialog.setMessage(result);
-        alertDialog.show();
+
         super.onPostExecute(result);
 
         //Accesso a RicercaSupermercati da SchermataIniziale con dato email
-        if (result.equals("venditore")||result.equals("acquirente")) {
-            MainActivity.tipo=result;
-            Intent intent = new Intent(this.context, MainActivity.class);
-            MainActivity.email=user_name;
-            context.startActivity(intent);
+        if(type.equals("tipo")){
+            if(result!=null){
+                MainActivity.tipo=result;
+                Intent intent = new Intent(this.context, MainActivity.class);
+                MainActivity.email=user_name;
+
+                context.startActivity(intent);
+                Toast.makeText(this.context,"Benvenuto "+user_name,Toast.LENGTH_SHORT).show();
+            }else{
+                result="";
+                Toast.makeText(this.context,"Credenziali errate! ",Toast.LENGTH_SHORT).show();
+            }
         }
 
         //Ritorno ad Accesso_admin dopo Inserimento_attivita con dato email
         if (result.equals("Completato")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-            MainActivity.email=user_name;
+            alertDialog.show();
             context.startActivity(intent);
         }
 
@@ -368,15 +376,20 @@ public class Background extends AsyncTask<String, Void, String> {
         if (result.equals("Prodotto inserito con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
             context.startActivity(intent);
-
+            alertDialog.show();
         }
 
         //Accesso a Carta terminata una registrazione con passaggio del dato email
         if (result.equals("Utente creato con successo")) {
+            MainActivity.email=email_reg;
+            System.out.println("\n Email reg: "+email_reg);
             Intent intent = new Intent(this.context, Carta.class);
-
+            alertDialog.show();
+            //intent.putExtra("email", email_reg);
             intent.putExtra("tipo", tipo);
             System.out.println("da reg a card "+tipo);
+            MainActivity.tipo=tipo;
+            alertDialog.setMessage("Benvenuto in SpeedyMarkt!");
             context.startActivity(intent);
             ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
@@ -384,13 +397,15 @@ public class Background extends AsyncTask<String, Void, String> {
         //Accesso a SchermataIniziale terminata una registrazione carta con passaggio del dato email
         if (result.equals("Carta creata con successo")) {
             Intent intent = new Intent(this.context, MainActivity.class);
-
+            MainActivity.email=email_card;
             intent.putExtra("tipo", tipocard);
             System.out.println("da card a main "+tipocard);
+            MainActivity.tipo=tipocard;
             context.startActivity(intent);
 
         }
     }
+
 
 
 

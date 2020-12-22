@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        System.out.println(tipo);
-        // prelievo dati
+
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            email = extras.getString("email");
+            //email = extras.getString("email");
             //tipo = extras.getString("tipo");
             negozio_sel = extras.getString("negozio_sel");
             nome = extras.getString("nome");
@@ -109,10 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(negozio_sel!=null&&cond.equals("TRUE")){
             nuovoProdotto fragmenti = new nuovoProdotto();
             Bundle args = new Bundle();
-            args.putString("email", email);
-            args.putString("negozio_sel",negozio_sel);
-            args.putString("nome",nome);
-            args.putString("id",id);
+
+            args.putString("id",negozio_sel);
             fragmenti.setArguments(args);
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();

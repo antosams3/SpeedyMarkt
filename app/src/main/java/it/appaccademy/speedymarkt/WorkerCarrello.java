@@ -1,11 +1,7 @@
 package it.appaccademy.speedymarkt;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.renderscript.ScriptGroup;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,7 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.UUID;
 
 public class WorkerCarrello extends AsyncTask<String, Void, Void> {
     String login_url;
@@ -70,7 +65,7 @@ public class WorkerCarrello extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-        login_url = "http://10.0.2.2/ordine_prodotto.php";
+        login_url = "http://25.59.197.115/ordine_prodotto.php";
             try {
                 URL url = new URL(login_url);
                 for (int i = 0; i < Carrello.carrello.size(); i++) {

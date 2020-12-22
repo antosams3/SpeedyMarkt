@@ -30,12 +30,12 @@ public class Carta extends AppCompatActivity {
         //Prelievo del dato email
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            email = extras.getString("email");
             tipo = extras.getString("tipo");
+            //email=MainActivity.email;
             System.out.println("prelievo da reg "+tipo);
         }
 
-
+        System.out.println("Siamo sicuri "+MainActivity.email);
 
         //Gestione calendario
         mDisplayDate = findViewById(R.id.scadenza);
@@ -77,7 +77,7 @@ public class Carta extends AppCompatActivity {
         String cvv = ((EditText) findViewById(R.id.cvv)).getText().toString();
         //Thread
         Background backgroundWorker = new Background(this);
-        backgroundWorker.execute("card", email, titolare, numero, scadenza, cvv, tipo);
+        backgroundWorker.execute("card", MainActivity.email, titolare, numero, scadenza, cvv, tipo);
 
 
     }

@@ -143,7 +143,7 @@ class customAdapter extends BaseAdapter {
                     i.putExtra("negozio_sel",list.get(position).getId());
                     i.putExtra("nome", list.get(position).getNome());
                     i.putExtra("via", list.get(position).getVia());
-                    i.putExtra("email",MainActivity.email);
+                    //i.putExtra("email",MainActivity.email);
                     i.putExtra("from",from);
                     i.putExtra("id",list.get(position).getId());
                     c.startActivity(i);

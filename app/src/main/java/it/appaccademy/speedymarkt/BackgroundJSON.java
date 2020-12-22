@@ -68,8 +68,6 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
                 TvTitolare = (String) JO.get("titolare")+"\n";
                 TvCarta = (String) JO.get("numero") + "\n";
                 TvScadenza = (String) JO.get("scadenza") + "\n";
-
-
             }
 
         } catch (MalformedURLException e) {
@@ -88,8 +86,6 @@ public class BackgroundJSON extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-
-        Profilo.email = email;
         Profilo.TvAnagNome.setText(this.TvNome);
         Profilo.TvAnagCognome.setText(this.TvCognome);
         Profilo.TvAnagDatanasc.setText(this.TvData);
