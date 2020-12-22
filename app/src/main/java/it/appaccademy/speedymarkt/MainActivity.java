@@ -212,9 +212,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void ongoCarrello(String nome, String via) {
         Carrello fragmento = new Carrello();
         Bundle args = new Bundle();
-        args.putString("email", email);
+
         args.putString("nome", nome);
         args.putString("via", via);
+
         fragmento.setArguments(args);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -241,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Pagamento fragmento = new Pagamento();
         Bundle args = new Bundle();
         args.putString("idOrdine", idOrdine);
-        args.putString("email", email);
         args.putString("prezzoNonArr", prezzoNonArr);
         args.putString("nome", nome);
         args.putString("via", via);

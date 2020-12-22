@@ -65,7 +65,7 @@ public class WorkerCarrello extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
 
-        login_url = "http://25.59.197.115/ordine_prodotto.php";
+        login_url = "http://10.0.2.2/ordine_prodotto.php";
             try {
                 URL url = new URL(login_url);
                 for (int i = 0; i < Carrello.carrello.size(); i++) {

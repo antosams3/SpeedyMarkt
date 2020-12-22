@@ -36,9 +36,6 @@ public class Carrello extends Fragment {
         View view = inflater.inflate(R.layout.elenco_carrello, container, false);
 
 
-        if (getArguments() != null) {
-            email = getArguments().getString("email");
-        }
 
         if (getArguments() != null) {
            nome = getArguments().getString("nome");
@@ -75,7 +72,7 @@ public class Carrello extends Fragment {
                 //Al click su "vai al pagamento" viene generato automaticamente l'id dell'ordine
                 code = UUID.randomUUID();
                 idOrdine = code.toString().substring(0,8);
-                listener.ongoPagamento(idOrdine, email, prezzoNonArr, nome, via);
+                listener.ongoPagamento(idOrdine, MainActivity.email, prezzoNonArr, nome, via);
             }
         });
 

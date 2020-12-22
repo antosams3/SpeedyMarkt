@@ -28,7 +28,7 @@ public class Pagamento extends Fragment {
     String via;
     private Pagamento.onFragmentBtnSelected3 listener;
     private Pagamento.onFragmenBtnSelected4 listener2;
-
+    boolean cond=false;
 
     @Nullable
     @Override
@@ -37,6 +37,7 @@ public class Pagamento extends Fragment {
 
         if (getArguments() != null) {
             idOrdine = getArguments().getString("idOrdine");
+
         }
 
 
