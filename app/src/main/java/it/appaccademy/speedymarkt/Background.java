@@ -34,7 +34,7 @@ public class Background extends AsyncTask<String, Void, String> {
     String data = "";
     String tipo;
     String nome;
-    String nomecard, tipocard;
+    String tipocard;
 
 
 

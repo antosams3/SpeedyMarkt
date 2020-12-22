@@ -62,7 +62,7 @@
         android:fontFamily="@font/open_sans_light"
         android:gravity="center"
         android:hint="Prezzo unitario"
-        android:inputType="number"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
